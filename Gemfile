@@ -29,8 +29,22 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
+  # Rspec
+  gem "rspec-rails"
+  # Factory Bot
+  gem "factory_bot_rails"
+  # Timecop
+  gem "timecop"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # pry
+  gem "pry-byebug"
+  gem "pry-doc"
+  gem "pry-rails"
+  gem "pry-stack_explorer"
+  # Rubocop
+  gem "rubocop"
+  gem "rubocop-rails"
 end
 
 group :development do
@@ -42,6 +56,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # For class documentation
+  gem "annotate"
 end
 
 group :test do
