@@ -37,6 +37,10 @@ Metrics/MethodLength:
 Metrics/ClassLength:
   Max: 1500
 
+Style/ClassAndModuleChildren:
+  Enabled: true
+  EnforcedStyle: compact
+
 # No space makes the method definition shorter and differentiates
 # from a regular assignment.
 Layout/SpaceAroundEqualsInParameterDefault:
@@ -88,6 +92,7 @@ Lint/AssignmentInCondition:
 Style/RaiseArgs:
   Enabled: true
   EnforcedStyle: compact
+
 
 # Make expression easier to understand
 Layout/MultilineOperationIndentation:
