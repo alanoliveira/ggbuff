@@ -28,6 +28,9 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+# HTTP Client
+gem "httparty", "~> 0.17.0"
+
 group :development, :test do
   # Rspec
   gem "rspec-rails"
