@@ -33,6 +33,7 @@ gem "httparty", "~> 0.17.0"
 
 group :development, :test do
   # Rspec
+  gem "rspec-collection_matchers"
   gem "rspec-rails"
   # Factory Bot
   gem "factory_bot_rails"
