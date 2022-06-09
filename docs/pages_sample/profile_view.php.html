@@ -1,0 +1,927 @@
+<html><head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<title>GGXrd REV 2 プレイヤーズギルド</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="1">
+<meta name="format-detection" content="telephone=no">
+<link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="img/favicon.ico" type="image/vnd.microsoft.icon">
+<link href="css/common.css" rel="stylesheet" type="text/css">
+<script src="js/jquery-1.10.1.min.js"></script>
+<script>
+$(function() {
+$('a[href=#top]').click(function(){
+    $(window).scrollTop(0);
+    return false;
+});
+});
+</script>
+<!--[if IE]>
+<script src="js/html5.js" type="text/javascript"></script>
+<script src="js/IE9.js" type="text/javascript"></script>
+<script src="js/jquery.backgroundSize.js"></script>
+<script>
+$(function() {
+$("#memberMenu ul li a").css( "background-size", "cover" );
+$("section h2").css( "background-size", "cover" );
+$("a").css("background-size", "contain");
+});
+</script>
+<![endif]-->
+</head>
+<body id="top" style="" data-new-gr-c-s-check-loaded="14.1063.0" data-gr-ext-installed="">
+<div id="wrapper">
+<p class="siteName">GGXrd REV 2 プレイヤーズギルド</p>
+
+<h1 id="header" class="contentHeader"><span><a href="index.php"><img src="img/header_small.jpg" width="100%" alt=""></a></span></h1>
+<div class="profileView">
+
+<section id="pageNavi">
+<a href="#profile">プロフィール</a>
+ | <a href="#record_total">総合プレイデータ</a>
+ | <a href="#record_battle">対人戦プレイデータ</a>
+ | <a href="#record_battle_detail">プレイデータ詳細</a>
+ | <a href="#record_character">キャラ別戦績</a>
+</section>
+
+
+<section>
+<h2 id="profile">基本プロフィール</h2>
+
+<div>
+<dl class="item_box email cf">
+<dt class="title custom email">メールアドレス</dt>
+
+<dd class="field custom email">[<a href="email_edit.php">変更</a>]</dd>
+
+</dl>
+
+<dl class="item_box player_name cf">
+<dt class="title show player_name">プレイヤーネーム</dt>
+
+<dd class="field show player_name">MyName [<a href="player_name_edit.php">変更</a>]</dd>
+
+</dl>
+
+<dl class="item_box sex cf">
+<dt class="title show sex">性別</dt>
+
+<dd class="field show sex">- [<a href="profile_edit.php">変更</a>]</dd>
+
+</dl>
+
+<dl class="item_box birthday cf">
+<dt class="title show birthday">生年月日</dt>
+
+<dd class="field show birthday">1989/01/31 [<a href="profile_edit.php">変更</a>]</dd>
+
+</dl>
+
+<dl class="item_box public_comment cf">
+<dt class="title show public_comment">公開コメント</dt>
+
+<dd class="field show public_comment">- [<a href="profile_edit.php">変更</a>]</dd>
+
+</dl>
+
+<dl class="item_box player_title cf">
+<dt class="title show player_title">称号</dt>
+
+<dd class="field show player_title">- [<a href="player_title_edit.php">変更</a>]</dd>
+
+</dl>
+
+<dl class="item_box battle_hidden cf">
+<dt class="title show battle_hidden">トータル試合数</dt>
+
+<dd class="field show battle_hidden">表示&nbsp;[<a href="change_battle_hidden.php?mode=exe&amp;battle_hidden=1">変更</a>]</dd>
+
+</dl>
+
+<dl class="item_box win_hidden cf">
+<dt class="title show win_hidden">勝利数</dt>
+
+<dd class="field show win_hidden">表示&nbsp;[<a href="change_win_hidden.php?mode=exe&amp;win_hidden=1">変更</a>]</dd>
+
+</dl>
+
+<dl class="item_box homeground cf">
+<dt class="title show homeground">ホームグラウンド</dt>
+
+<dd class="field show homeground">新宿スポーツランド本館 [<a href="homeground_edit.php">変更</a>]</dd>
+
+</dl>
+
+<dl class="item_box gp cf">
+<dt class="title show gp">所持W$</dt>
+
+<dd class="field show gp">132900 W$</dd>
+
+</dl>
+
+<dl class="item_box play_time cf">
+<dt class="title show play_time">よく遊ぶ時間帯</dt>
+
+<dd class="field show play_time">20：00～00：00</dd>
+
+</dl>
+
+<dl class="item_box show_notice cf">
+<dt class="title show show_notice">新着通知</dt>
+
+<dd class="field show show_notice">ON&nbsp;[<a href="change_show_notice.php?mode=exe&amp;show_notice=0">変更</a>]</dd>
+
+</dl>
+
+<dl class="item_box show_voice_comment cf">
+<dt class="title show show_voice_comment">ボイスコメント表示設定</dt>
+
+<dd class="field show show_voice_comment">ON&nbsp;[<a href="change_show_voice_comment.php?mode=exe&amp;show_voice_comment=0">変更</a>]</dd>
+
+</dl>
+
+<dl class="item_box show_quest cf">
+<dt class="title show show_quest">クエスト設定</dt>
+
+<dd class="field show show_quest">非表示／すべて [<a href="quest_edit.php">設定</a>]</dd>
+
+</dl>
+
+<dl class="item_box amulet_hidden cf">
+<dt class="title show amulet_hidden">お守りの表示</dt>
+
+<dd class="field show amulet_hidden">降格戦のみ&nbsp;[<a id="amulet_hidden" href="change_amulet_hidden.php?mode=exe&amp;amulet_hidden=0">変更</a>]</dd>
+
+</dl>
+
+<dl class="item_box show_twitter cf">
+<dt class="title show show_twitter">twitter連携設定</dt>
+
+<dd class="field show show_twitter">[<a href="twitter_edit.php">詳細設定</a>]</dd>
+
+</dl>
+
+<p class="profEdit"><a href="profile_edit.php" class="linkIcon">プロフィール&amp;公開情報を編集する</a></p><dl class="item_box guild_name cf">
+<dt class="title show guild_name">所属トライブ</dt>
+
+<dd class="field show guild_name">無所属</dd>
+
+</dl>
+
+<dl class="item_box guild_point cf">
+<dt class="title show guild_point">トライブポイント</dt>
+
+<dd class="field show guild_point">- point</dd>
+
+</dl>
+
+<dl class="item_box guild_comment cf">
+<dt class="title show guild_comment">トライブ内コメント</dt>
+
+<dd class="field show guild_comment">-</dd>
+
+</dl>
+
+<dl class="item_box vote_ticket cf">
+<dt class="title show vote_ticket">所持投票券</dt>
+
+<dd class="field show vote_ticket">0 枚</dd>
+
+</dl>
+
+</div>
+
+</section>
+
+<section class="dataBox" id="record_total">
+<h2>総合プレイデータ</h2>
+
+<div class="profEdit">
+更新日時: 12/31 23:04 [ <a href="sync.php">最新のデータを読み込む</a> ]
+</div>
+
+<div>
+<dl class="item_box total_play_count cf">
+<dt class="title show total_play_count">総プレイ回数</dt>
+
+<dd class="field show total_play_count">4737 回</dd>
+
+</dl>
+
+<dl class="item_box total_play_time cf">
+<dt class="title show total_play_time">総プレイ時間</dt>
+
+<dd class="field show total_play_time">438時間44分</dd>
+
+</dl>
+
+<dl class="item_box max_play_days cf">
+<dt class="title show max_play_days">最長継続日数</dt>
+
+<dd class="field show max_play_days">14 日</dd>
+
+</dl>
+
+<dl class="item_box play_days cf">
+<dt class="title show play_days">現在の継続日数</dt>
+
+<dd class="field show play_days">1 日</dd>
+
+</dl>
+
+<dl class="item_box level cf">
+<dt class="title show level">LEVEL</dt>
+
+<dd class="field show level">200</dd>
+
+</dl>
+
+<dl class="item_box rebel_pt cf">
+<dt class="title show rebel_pt">EXP</dt>
+
+<dd class="field show rebel_pt">384136020 pts.</dd>
+
+</dl>
+
+<dl class="item_box next_level cf">
+<dt class="title show next_level">次のLEVELまで</dt>
+
+<dd class="field show next_level">2147483647 pts.</dd>
+
+</dl>
+
+<dl class="item_box medal_count cf">
+<dt class="title show medal_count">獲得バッジ</dt>
+
+<dd class="field show medal_count">274 個</dd>
+
+</dl>
+
+<p class="profEdit"><a href="medal_view.php" class="linkIcon">バッジリストを確認</a></p><dl class="item_box quest_point cf">
+<dt class="title show quest_point">クエストポイント</dt>
+
+<dd class="field show quest_point">0</dd>
+
+</dl>
+
+<dl class="item_box mom_medal_total_count cf">
+<dt class="title show mom_medal_total_count">M.O.M獲得メダル数</dt>
+
+<dd class="field show mom_medal_total_count">23677 個</dd>
+
+</dl>
+
+<dl class="item_box mom_medal_now_count cf">
+<dt class="title show mom_medal_now_count">M.O.M所持メダル数</dt>
+
+<dd class="field show mom_medal_now_count">21277 個</dd>
+
+</dl>
+
+</div>
+</section>
+
+<section class="dataBox" id="record_battle">
+<h2>対人戦プレイデータ</h2>
+<div><dl class="item_box battle_count cf">
+<dt class="title show battle_count">対戦回数</dt>
+
+<dd class="field show battle_count">7326 戦</dd>
+
+</dl>
+
+<dl class="item_box vs_time cf">
+<dt class="title show vs_time">対戦時間</dt>
+
+<dd class="field show vs_time">16日23時間29分0秒</dd>
+
+</dl>
+
+<dl class="item_box vs_rounds cf">
+<dt class="title show vs_rounds">対戦ラウンド数</dt>
+
+<dd class="field show vs_rounds">23388 ラウンド</dd>
+
+</dl>
+
+<dl class="item_box win_count cf">
+<dt class="title show win_count">通算勝利数</dt>
+
+<dd class="field show win_count">3155 勝</dd>
+
+</dl>
+
+<dl class="item_box win_rate cf">
+<dt class="title show win_rate">勝率</dt>
+
+<dd class="field show win_rate">43 ％</dd>
+
+</dl>
+
+<dl class="item_box max_consecutive_win cf">
+<dt class="title show max_consecutive_win">最大連勝数</dt>
+
+<dd class="field show max_consecutive_win">16 連勝</dd>
+
+</dl>
+
+<dl class="item_box current_consecutive_win cf">
+<dt class="title show current_consecutive_win">現在の連勝数</dt>
+
+<dd class="field show current_consecutive_win">0 連勝</dd>
+
+</dl>
+
+<dl class="item_box rank cf">
+<dt class="title show rank">最高RR（段位）</dt>
+
+<dd class="field show rank">賞金首</dd>
+
+</dl>
+
+<dl class="item_box max_rank_character cf">
+<dt class="title show max_rank_character">最高RRキャラ</dt>
+
+<dd class="field show max_rank_character">カイ=キスク</dd>
+
+</dl>
+
+<dl class="item_box challenge_num cf">
+<dt class="title show challenge_num">乱入対戦数</dt>
+
+<dd class="field show challenge_num">4026 戦</dd>
+
+</dl>
+
+<dl class="item_box challenge_win_num cf">
+<dt class="title show challenge_win_num">乱入勝利数</dt>
+
+<dd class="field show challenge_win_num">1369 勝</dd>
+
+</dl>
+
+<dl class="item_box accept_num cf">
+<dt class="title show accept_num">被乱入対戦数</dt>
+
+<dd class="field show accept_num">3300 戦</dd>
+
+</dl>
+
+<dl class="item_box accept_win_num cf">
+<dt class="title show accept_win_num">被乱入勝利数</dt>
+
+<dd class="field show accept_win_num">1786 勝</dd>
+
+</dl>
+
+<dl class="item_box inferior_num cf">
+<dt class="title show inferior_num">格上対戦数</dt>
+
+<dd class="field show inferior_num">1715 戦</dd>
+
+</dl>
+
+<dl class="item_box inferior_win_num cf">
+<dt class="title show inferior_win_num">格上勝利数</dt>
+
+<dd class="field show inferior_win_num">253 勝</dd>
+
+</dl>
+
+<dl class="item_box lately_result cf">
+<dt class="title show lately_result">過去10戦の戦歴</dt>
+
+<dd class="field show lately_result">×××◯×◯×◯×◯</dd>
+
+</dl>
+
+<p class="profEdit"><a href="play_log_view.php" class="linkIcon">過去の戦歴をさらに詳しく</a></p></div>
+</section>
+
+<section class="dataBox" id="record_battle_detail">
+<h2>プレイデータ詳細</h2>
+<div><dl class="item_box perfect_wins cf">
+<dt class="title show perfect_wins">パーフェクト勝利<br>ラウンド数</dt>
+
+<dd class="field show perfect_wins">283 回</dd>
+
+</dl>
+
+<dl class="item_box timeup cf">
+<dt class="title show timeup">タイムアップラウンド数</dt>
+
+<dd class="field show timeup">25 回</dd>
+
+</dl>
+
+<dl class="item_box max_combo cf">
+<dt class="title show max_combo">最大コンボHIT数</dt>
+
+<dd class="field show max_combo">20 BEAT</dd>
+
+</dl>
+
+<dl class="item_box max_combo_atack cf">
+<dt class="title show max_combo_atack">最大コンボダメージ</dt>
+
+<dd class="field show max_combo_atack">301</dd>
+
+</dl>
+
+<dl class="item_box max_damage cf">
+<dt class="title show max_damage">最大被ダメージ</dt>
+
+<dd class="field show max_damage">314</dd>
+
+</dl>
+
+<dl class="item_box total_atack cf">
+<dt class="title show total_atack">累計与ダメージ</dt>
+
+<dd class="field show total_atack">7434672</dd>
+
+</dl>
+
+<dl class="item_box total_damage cf">
+<dt class="title show total_damage">累計被ダメージ</dt>
+
+<dd class="field show total_damage">7971159</dd>
+
+</dl>
+
+<dl class="item_box kakusei_attack cf">
+<dt class="title show kakusei_attack">覚醒必殺技 発動数</dt>
+
+<dd class="field show kakusei_attack">4946 回</dd>
+
+</dl>
+
+<dl class="item_box kakusei_finish cf">
+<dt class="title show kakusei_finish">覚醒必殺技<br>フィニッシュ数</dt>
+
+<dd class="field show kakusei_finish">666 回</dd>
+
+</dl>
+
+<dl class="item_box burst_kakusei_attack cf">
+<dt class="title show burst_kakusei_attack">バースト覚醒必殺技<br>発動数</dt>
+
+<dd class="field show burst_kakusei_attack">63 回</dd>
+
+</dl>
+
+<dl class="item_box burst_kakusei_finish cf">
+<dt class="title show burst_kakusei_finish">バースト覚醒必殺技<br>フィニッシュ数</dt>
+
+<dd class="field show burst_kakusei_finish">24 回</dd>
+
+</dl>
+
+<dl class="item_box itigeki_prepare cf">
+<dt class="title show itigeki_prepare">一撃必殺準備 発動数</dt>
+
+<dd class="field show itigeki_prepare">53 回</dd>
+
+</dl>
+
+<dl class="item_box itigeki_attack cf">
+<dt class="title show itigeki_attack">一撃必殺技 発動数</dt>
+
+<dd class="field show itigeki_attack">19 回</dd>
+
+</dl>
+
+<dl class="item_box itigeki_finish cf">
+<dt class="title show itigeki_finish">一撃必殺技 フィニッシュ数</dt>
+
+<dd class="field show itigeki_finish">13 回</dd>
+
+</dl>
+
+<dl class="item_box itigeki_damage cf">
+<dt class="title show itigeki_damage">一撃必殺技 被弾数</dt>
+
+<dd class="field show itigeki_damage">9 回</dd>
+
+</dl>
+
+<dl class="item_box throw_attack cf">
+<dt class="title show throw_attack">通常投げ 成功数（地上）</dt>
+
+<dd class="field show throw_attack">4967 回</dd>
+
+</dl>
+
+<dl class="item_box throw_damage cf">
+<dt class="title show throw_damage">通常投げ 被弾数（地上）</dt>
+
+<dd class="field show throw_damage">5836 回</dd>
+
+</dl>
+
+<dl class="item_box sky_throw_attack cf">
+<dt class="title show sky_throw_attack">通常投げ 成功数（空中）</dt>
+
+<dd class="field show sky_throw_attack">2127 回</dd>
+
+</dl>
+
+<dl class="item_box sky_throw_damage cf">
+<dt class="title show sky_throw_damage">通常投げ 被弾数（空中）</dt>
+
+<dd class="field show sky_throw_damage">1821 回</dd>
+
+</dl>
+
+<dl class="item_box throw_offset cf">
+<dt class="title show throw_offset">投げ相殺 発生数（地上）</dt>
+
+<dd class="field show throw_offset">390 回</dd>
+
+</dl>
+
+<dl class="item_box sky_throw_offset cf">
+<dt class="title show sky_throw_offset">投げ相殺 発生数（空中）</dt>
+
+<dd class="field show sky_throw_offset">95 回</dd>
+
+</dl>
+
+<dl class="item_box dust_attack cf">
+<dt class="title show dust_attack">ダストアタック 成功数</dt>
+
+<dd class="field show dust_attack">4323 回</dd>
+
+</dl>
+
+<dl class="item_box dust_damage cf">
+<dt class="title show dust_damage">ダストアタック 被弾数</dt>
+
+<dd class="field show dust_damage">3079 回</dd>
+
+</dl>
+
+<dl class="item_box deny cf">
+<dt class="title show deny">ブリッツシールド 発動数</dt>
+
+<dd class="field show deny">6299 回</dd>
+
+</dl>
+
+<dl class="item_box deny_success cf">
+<dt class="title show deny_success">ブリッツシールド 成功数</dt>
+
+<dd class="field show deny_success">2657 回</dd>
+
+</dl>
+
+<dl class="item_box deny_damage cf">
+<dt class="title show deny_damage">ブリッツシールド 被弾数</dt>
+
+<dd class="field show deny_damage">1236 回</dd>
+
+</dl>
+
+<dl class="item_box bsca cf">
+<dt class="title show bsca">ブリッツシールドチャージアタック 発動数</dt>
+
+<dd class="field show bsca">3869 回</dd>
+
+</dl>
+
+<dl class="item_box bsca_hit cf">
+<dt class="title show bsca_hit">ブリッツシールドチャージアタック 成功数</dt>
+
+<dd class="field show bsca_hit">1599 回</dd>
+
+</dl>
+
+<dl class="item_box bsca_damage cf">
+<dt class="title show bsca_damage">ブリッツシールドチャージアタック 被弾数</dt>
+
+<dd class="field show bsca_damage">811 回</dd>
+
+</dl>
+
+<dl class="item_box dead_angle cf">
+<dt class="title show dead_angle">デッドアングルアタック<br>発動数</dt>
+
+<dd class="field show dead_angle">952 回</dd>
+
+</dl>
+
+<dl class="item_box romancancel cf">
+<dt class="title show romancancel">ロマンキャンセル 発動数</dt>
+
+<dd class="field show romancancel">34805 回</dd>
+
+</dl>
+
+<dl class="item_box offset cf">
+<dt class="title show offset">通常相殺 発生数</dt>
+
+<dd class="field show offset">1885 回</dd>
+
+</dl>
+
+<dl class="item_box danger_time cf">
+<dt class="title show danger_time">デンジャータイム 発生数</dt>
+
+<dd class="field show danger_time">541 回</dd>
+
+</dl>
+
+<dl class="item_box low_damage cf">
+<dt class="title show low_damage">下段攻撃 被弾数</dt>
+
+<dd class="field show low_damage">4563 回</dd>
+
+</dl>
+
+<dl class="item_box middle_damage cf">
+<dt class="title show middle_damage">中段攻撃 被弾数</dt>
+
+<dd class="field show middle_damage">6579 回</dd>
+
+</dl>
+
+<dl class="item_box middle_guard cf">
+<dt class="title show middle_guard">中段攻撃 ガード数</dt>
+
+<dd class="field show middle_guard">19586 回</dd>
+
+</dl>
+
+<dl class="item_box just_guard cf">
+<dt class="title show just_guard">直前ガード 成功数</dt>
+
+<dd class="field show just_guard">19568 回</dd>
+
+</dl>
+
+<dl class="item_box counter_attack cf">
+<dt class="title show counter_attack">カウンターヒット 成功数</dt>
+
+<dd class="field show counter_attack">69798 回</dd>
+
+</dl>
+
+<dl class="item_box counter_damage cf">
+<dt class="title show counter_damage">カウンターヒット 被弾数</dt>
+
+<dd class="field show counter_damage">72280 回</dd>
+
+</dl>
+
+<dl class="item_box super_counter_attack cf">
+<dt class="title show super_counter_attack">モータルカウンターヒット 成功数</dt>
+
+<dd class="field show super_counter_attack">513 回</dd>
+
+</dl>
+
+<dl class="item_box super_counter_damage cf">
+<dt class="title show super_counter_damage">モータルカウンターヒット 被弾数</dt>
+
+<dd class="field show super_counter_damage">537 回</dd>
+
+</dl>
+
+<dl class="item_box burst cf">
+<dt class="title show burst">サイクバースト発動数</dt>
+
+<dd class="field show burst">14413 回</dd>
+
+</dl>
+
+<dl class="item_box gold_burst cf">
+<dt class="title show gold_burst">サイクバースト（金色）<br>発動数</dt>
+
+<dd class="field show gold_burst">684 回</dd>
+
+</dl>
+
+<dl class="item_box gold_burst_hit cf">
+<dt class="title show gold_burst_hit">サイクバースト（金色）<br>成功数 </dt>
+
+<dd class="field show gold_burst_hit">370 回</dd>
+
+</dl>
+
+<dl class="item_box bule_burst cf">
+<dt class="title show bule_burst">サイクバースト（青色）<br>発動数</dt>
+
+<dd class="field show bule_burst">13729 回</dd>
+
+</dl>
+
+<dl class="item_box bule_burst_hit cf">
+<dt class="title show bule_burst_hit">サイクバースト（青色）<br>成功数</dt>
+
+<dd class="field show bule_burst_hit">11033 回</dd>
+
+</dl>
+
+<dl class="item_box bule_burst_avoid cf">
+<dt class="title show bule_burst_avoid">サイクバーストに<br>反撃した回数</dt>
+
+<dd class="field show bule_burst_avoid">1078 回</dd>
+
+</dl>
+
+<dl class="item_box bule_burst_miss cf">
+<dt class="title show bule_burst_miss">サイクバーストに<br>反撃された回数</dt>
+
+<dd class="field show bule_burst_miss">1633 回</dd>
+
+</dl>
+
+<dl class="item_box burst_max_lose cf">
+<dt class="title show burst_max_lose">サイクバーストゲージMAXで敗北したラウンド数</dt>
+
+<dd class="field show burst_max_lose">772 回</dd>
+
+</dl>
+
+<dl class="item_box tension_max_finish cf">
+<dt class="title show tension_max_finish">テンションゲージMAXで<br>ラウンド終了</dt>
+
+<dd class="field show tension_max_finish">370 回</dd>
+
+</dl>
+
+<dl class="item_box tension_max_win cf">
+<dt class="title show tension_max_win">テンションゲージMAXで<br>ラウンド勝利</dt>
+
+<dd class="field show tension_max_win">162 回</dd>
+
+</dl>
+
+<dl class="item_box tension_max_lose cf">
+<dt class="title show tension_max_lose">テンションゲージMAXで<br>ラウンド敗北</dt>
+
+<dd class="field show tension_max_lose">208 回</dd>
+
+</dl>
+
+<dl class="item_box risc_max_damage cf">
+<dt class="title show risc_max_damage">自分のR.I.S.C. レベルが<br>点滅したラウンド数</dt>
+
+<dd class="field show risc_max_damage">362 Round</dd>
+
+</dl>
+
+<dl class="item_box risc_max_attack cf">
+<dt class="title show risc_max_attack">相手のR.I.S.C. レベルを<br>点滅させたラウンド数</dt>
+
+<dd class="field show risc_max_attack">1234 Round</dd>
+
+</dl>
+
+<dl class="item_box dokidoki_stop cf">
+<dt class="title show dokidoki_stop">ドラマティックフィナーレ 発生数</dt>
+
+<dd class="field show dokidoki_stop">49 回</dd>
+
+</dl>
+
+<h3 class="profSubTitle2">▼ エピソードモード</h3><dl class="item_box arcade_play cf">
+<dt class="title show arcade_play">プレイ回数</dt>
+
+<dd class="field show arcade_play">14 回</dd>
+
+</dl>
+
+<dl class="item_box arcade_playtime cf">
+<dt class="title show arcade_playtime">プレイ時間</dt>
+
+<dd class="field show arcade_playtime">0日0時間39分4秒</dd>
+
+</dl>
+
+<dl class="item_box arcade_clear cf">
+<dt class="title show arcade_clear">クリア回数</dt>
+
+<dd class="field show arcade_clear">1 回</dd>
+
+</dl>
+
+<dl class="item_box arcade_score cf">
+<dt class="title show arcade_score">最高得点</dt>
+
+<dd class="field show arcade_score">3019460 pts.</dd>
+
+</dl>
+
+<h3 class="profSubTitle2">▼ M.O.Mモード</h3><dl class="item_box mom_play cf">
+<dt class="title show mom_play">プレイ回数</dt>
+
+<dd class="field show mom_play">3 回</dd>
+
+</dl>
+
+<dl class="item_box mom_playtime cf">
+<dt class="title show mom_playtime">プレイ時間</dt>
+
+<dd class="field show mom_playtime">0日0時間21分37秒</dd>
+
+</dl>
+
+<dl class="item_box mom_total_move cf">
+<dt class="title show mom_total_move">プレイ完遂数</dt>
+
+<dd class="field show mom_total_move">0 回</dd>
+
+</dl>
+
+<dl class="item_box mom_clear cf">
+<dt class="title show mom_clear">ステージクリア数</dt>
+
+<dd class="field show mom_clear">6 回</dd>
+
+</dl>
+
+<dl class="item_box mom_max_combo cf">
+<dt class="title show mom_max_combo">最大コンボHIT数</dt>
+
+<dd class="field show mom_max_combo">14 BEAT</dd>
+
+</dl>
+
+<dl class="item_box mom_max_combo_attack cf">
+<dt class="title show mom_max_combo_attack">最大コンボダメージ数</dt>
+
+<dd class="field show mom_max_combo_attack">231</dd>
+
+</dl>
+
+<h3 class="profSubTitle2">▼ スパーリングモード</h3><dl class="item_box sparing_play cf">
+<dt class="title show sparing_play">プレイ回数</dt>
+
+<dd class="field show sparing_play">1387 回</dd>
+
+</dl>
+
+<dl class="item_box sparing_playtime cf">
+<dt class="title show sparing_playtime">プレイ時間</dt>
+
+<dd class="field show sparing_playtime">1日6時間14分44秒</dd>
+
+</dl>
+
+</div>
+
+</section>
+
+<section id="record_character">
+<h2>キャラクター別戦績詳細</h2>
+
+<div class="profPull">
+<form action="sync.php" method="post">
+<input type="hidden" name="to" value="record_view">
+<select name="character">
+<option value="sol">ソル=バッドガイ</option><option value="kyk">カイ=キスク</option><option value="may">メイ</option><option value="mll">ミリア=レイジ</option><option value="zat">ザトー=ONE</option><option value="pot">ポチョムキン</option><option value="chp">チップ=ザナフ</option><option value="fau">ファウスト</option><option value="axl">アクセル=ロウ</option><option value="ven">ヴェノム</option><option value="sly">スレイヤー</option><option value="ino">イノ</option><option value="bed">ベッドマン</option><option value="ram">ラムレザル=ヴァレンタイン</option><option value="sin">シン=キスク</option><option value="elp">エルフェルト=ヴァレンタイン</option><option value="leo">レオ=ホワイトファング</option><option value="jhn">ジョニー</option><option value="jko">ジャック・オー</option><option value="jam">蔵土縁紗夢</option><option value="kum">琴 慧弦</option><option value="rvn">レイヴン</option><option value="dzy">ディズィー</option><option value="bkn">梅喧</option><option value="ans">アンサー</option></select> の戦績詳細を
+<input type="submit" value="表示する">
+</form>
+</div>
+
+<div class="profPull">
+<form action="sync.php" method="post">
+<input type="hidden" name="to" value="record_battle_view">
+<select name="character">
+<option value="sol">ソル=バッドガイ</option><option value="kyk">カイ=キスク</option><option value="may">メイ</option><option value="mll">ミリア=レイジ</option><option value="zat">ザトー=ONE</option><option value="pot">ポチョムキン</option><option value="chp">チップ=ザナフ</option><option value="fau">ファウスト</option><option value="axl">アクセル=ロウ</option><option value="ven">ヴェノム</option><option value="sly">スレイヤー</option><option value="ino">イノ</option><option value="bed">ベッドマン</option><option value="ram">ラムレザル=ヴァレンタイン</option><option value="sin">シン=キスク</option><option value="elp">エルフェルト=ヴァレンタイン</option><option value="leo">レオ=ホワイトファング</option><option value="jhn">ジョニー</option><option value="jko">ジャック・オー</option><option value="jam">蔵土縁紗夢</option><option value="kum">琴 慧弦</option><option value="rvn">レイヴン</option><option value="dzy">ディズィー</option><option value="bkn">梅喧</option><option value="ans">アンサー</option></select> の対戦歴を
+<input type="submit" value="表示する">
+</form>
+</div>
+
+</section>
+
+
+
+
+
+
+
+</div>
+
+
+<p id="toTop"><a href="#top" data-ol-has-click-handler="">▲ページTOPへ</a></p>
+<div id="footer">
+
+<ul id="footerList" class="cf">
+<li><a href="index.php">サイトTOPへ</a></li>
+<li class="borderLeft"><a href="profile_view.php">プロフィール</a></li>
+<li class="borderBtmNone"><a href="logout.php">ログアウト</a></li>
+<li class="borderLeft borderBtmNone"><a href="ranking_view.php">ランキング</a></li>
+</ul>
+
+<p><a href="http://arcsystemworks.jp/" target="_blank" class="cf"><img src="./img/logo_arcsys.png"><span>アークシステムワークス公式サイトへ</span></a></p>
+<address>(C) ARC SYSTEM WORKS</address>
+</div>
+</div>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
