@@ -21,15 +21,16 @@ module GgxrdDotCom
 
         def self.create(parser)
           new(
-            result:        parser.result,
-            rank_change:   parser.rank_change,
-            player_rank:   parser.player_rank,
-            opponent_rank: parser.opponent_rank,
-            player_char:   paerser.player_char,
-            opponent_char: parser.opponent_char,
-            play_date:     parser.play_date,
-            shop_name:     parser.shop_name,
-            opponent_name: parser.opponent_name
+            result:               parser.result,
+            rank_change:          parser.icon_status_image,
+            player_rank:          parser.player_rank,
+            opponent_rank:        parser.opponent_rank,
+            player_char:          parser.player_char,
+            opponent_char:        parser.opponent_char,
+            play_date:            parser.play_date,
+            shop_name:            parser.shop_name,
+            opponent_name:        parser.opponent_name,
+            opponent_profile_url: parser.opponent_profile_url
           )
         end
 
@@ -59,6 +60,10 @@ module GgxrdDotCom
 
         def play_date=(str)
           @play_date = PlayDate.create(str)
+        end
+
+        def opponent_profile_url=(str)
+          @opponent_profile_url = ProfileUrl.new(url: str)
         end
 
         validates :result, presence: true, inclusion: {in: %i[win lose]}

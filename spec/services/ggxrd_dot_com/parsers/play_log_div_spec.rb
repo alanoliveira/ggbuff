@@ -2,15 +2,9 @@
 
 require "rails_helper"
 
-# rubocop:disable Style/OpenStructUse
-class PlayLogHtml < OpenStruct
-  def to_s; end
-end
-# rubocop:enable Style/OpenStructUse
-
 RSpec.describe GgxrdDotCom::Parsers::PlayLogDiv do
   let(:instance) { described_class.new(node) }
-  let(:node) { Nokogiri::HTML::DocumentFragment.parse(html) }
+  let(:node) { Nokogiri::HTML::DocumentFragment.parse(html).elements.first }
   let(:opponent_name) { "Rival" }
   let(:opponent_profile_url) { "http://..." }
   let(:player_char) { "カイ" }

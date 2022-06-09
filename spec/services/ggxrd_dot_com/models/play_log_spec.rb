@@ -5,6 +5,29 @@ require "rails_helper"
 RSpec.describe GgxrdDotCom::Models::PlayLog::Log do
   let(:instance) { described_class.new }
 
+  describe ".create" do
+    subject do
+      described_class.create(
+        instance_double(
+          GgxrdDotCom::Parsers::PlayLogDiv,
+          opponent_rank:        "",
+          node:                 "",
+          opponent_char:        "",
+          player_char:          "",
+          play_date:            "",
+          shop_name:            "",
+          opponent_profile_url: "",
+          result:               "",
+          opponent_name:        "",
+          icon_status_image:    "",
+          player_rank:          ""
+        )
+      )
+    end
+
+    it { is_expected.to be_a(described_class) }
+  end
+
   describe "#result=" do
     subject { instance.result = val }
     before { instance.instance_variable_set(:@result, Object.new) }

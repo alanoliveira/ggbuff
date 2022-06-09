@@ -21,18 +21,18 @@ RSpec.describe GgxrdDotCom::Parsers::PlayerSearchResultDiv do
     include_examples "unexpected html structure", "<div><a href='foo/bar'>GG PLAYER</a></div>"
   end
 
-  describe "#name" do
-    subject { described_class.new(node).name }
+  describe "#player_name" do
+    subject { described_class.new(node).player_name }
     let(:node) { Nokogiri::HTML::DocumentFragment.parse(html) }
-    let(:html) { "<div class='searchResultList'><a href='http://foo/bar'>#{name}</a></div>" }
+    let(:html) { "<div class='searchResultList'><a href='http://foo/bar'>#{player_name}</a></div>" }
 
-    context "when name exists" do
-      let(:name) { "GG BAIKEN PLAYER" }
-      it { is_expected.to eq(name) }
+    context "when player_name exists" do
+      let(:player_name) { "GG BAIKEN PLAYER" }
+      it { is_expected.to eq(player_name) }
     end
 
-    context "when name is blank" do
-      let(:name) { "" }
+    context "when player_name is blank" do
+      let(:player_name) { "" }
       it { is_expected.to eq("") }
     end
 

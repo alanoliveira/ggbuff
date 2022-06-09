@@ -13,7 +13,7 @@ module GgxrdDotCom
         anchor.attribute("href")&.value
       end
 
-      def name
+      def player_name
         anchor.text
       end
 
