@@ -5,8 +5,10 @@ require "rails_helper"
 RSpec.describe GgxrdDotCom::Parsers::PlayLogDiv do
   let(:instance) { described_class.new(node) }
   let(:node) { Nokogiri::HTML::DocumentFragment.parse(html).elements.first }
+  let(:opponent_signed?) { true }
   let(:opponent_name) { "Rival" }
-  let(:opponent_profile_url) { "http://..." }
+  let(:opponent_profile_url) { "member_profile_view.php?user_id=1" }
+  let(:opponent_has_guild?) { false }
   let(:player_char) { "カイ" }
   let(:opponent_char) { "ポチョムキン" }
   let(:player_rank) { "17段" }
@@ -17,6 +19,11 @@ RSpec.describe GgxrdDotCom::Parsers::PlayLogDiv do
   let(:rank_down) { false }
   let(:result) { "win" }
   let(:html) do
+    enemy_player_node = "GG PLAYER"
+    if opponent_signed?
+      enemy_player_node = "<a href='#{opponent_profile_url}'>#{opponent_name}</a>"
+      enemy_player_node += "(<a href='guild_view.php?guild_id=1'>opponent_guild</a>)" if opponent_has_guild?
+    end
     <<-HTML
         <div class="playLog">
           <h3><span class="#{result&.downcase}">#{result&.upcase}</span> vs #{opponent_char} </h3>
@@ -28,7 +35,7 @@ RSpec.describe GgxrdDotCom::Parsers::PlayLogDiv do
             <div><img src="img/thumb_xxx.jpg" width="60"><br>#{opponent_rank}</div>
           </div>
           <p class="my_player"><span>使用キャラクター：</span>#{player_char}</p>
-          <p class="enemy_player"><span>相手プレイヤー名：</span><a href="#{opponent_profile_url}">#{opponent_name}</a></p>
+          <p class="enemy_player"><span>相手プレイヤー名：</span>#{enemy_player_node}</p>
           <p class="shop_name"><span>対戦場所：</span>#{shop_name}</p>
           <p class="play_time"><span>対戦時刻：</span>#{play_date}</p>
         </div>
@@ -76,12 +83,9 @@ RSpec.describe GgxrdDotCom::Parsers::PlayLogDiv do
   describe "#player_rank" do
     let(:subject) { instance.player_rank }
 
-    context "when it exists" do
-      let(:player_rank) { "賞金首" }
-      it { is_expected.to eq player_rank }
-    end
+    it { is_expected.to eq player_rank }
 
-    context "when do not exists" do
+    context "when it is blank" do
       let(:player_rank) { "" }
       it { is_expected.to eq player_rank }
     end
@@ -92,12 +96,9 @@ RSpec.describe GgxrdDotCom::Parsers::PlayLogDiv do
   describe "#opponent_rank" do
     let(:subject) { instance.opponent_rank }
 
-    context "when it exists" do
-      let(:opponent_rank) { "25段" }
-      it { is_expected.to eq opponent_rank }
-    end
+    it { is_expected.to eq opponent_rank }
 
-    context "when do not exists" do
+    context "when it is blank" do
       let(:opponent_rank) { "" }
       it { is_expected.to eq opponent_rank }
     end
@@ -108,12 +109,9 @@ RSpec.describe GgxrdDotCom::Parsers::PlayLogDiv do
   describe "#player_char" do
     let(:subject) { instance.player_char }
 
-    context "when it exists" do
-      let(:player_char) { "梅喧" }
-      it { is_expected.to eq player_char }
-    end
+    it { is_expected.to eq player_char }
 
-    context "when do not exists" do
+    context "when it is blank" do
       let(:player_char) { "" }
       it { is_expected.to eq player_char }
     end
@@ -124,12 +122,9 @@ RSpec.describe GgxrdDotCom::Parsers::PlayLogDiv do
   describe "#opponent_char" do
     let(:subject) { instance.opponent_char }
 
-    context "when it exists" do
-      let(:opponent_char) { "メイ" }
-      it { is_expected.to eq opponent_char }
-    end
+    it { is_expected.to eq opponent_char }
 
-    context "when do not exists" do
+    context "when it is blank" do
       let(:opponent_char) { "" }
       it { is_expected.to eq opponent_char }
     end
@@ -140,12 +135,9 @@ RSpec.describe GgxrdDotCom::Parsers::PlayLogDiv do
   describe "#shop_name" do
     let(:subject) { instance.shop_name }
 
-    context "when it exists" do
-      let(:shop_name) { "ミカド" }
-      it { is_expected.to eq shop_name }
-    end
+    it { is_expected.to eq shop_name }
 
-    context "when do not exists" do
+    context "when it is blank" do
       let(:shop_name) { "" }
       it { is_expected.to eq shop_name }
     end
@@ -156,12 +148,9 @@ RSpec.describe GgxrdDotCom::Parsers::PlayLogDiv do
   describe "#play_date" do
     let(:subject) { instance.play_date }
 
-    context "when it exists" do
-      let(:play_date) { "12/31 15:00" }
-      it { is_expected.to eq play_date }
-    end
+    it { is_expected.to eq play_date }
 
-    context "when do not exists" do
+    context "when it is blank" do
       let(:play_date) { "" }
       it { is_expected.to eq play_date }
     end
@@ -172,14 +161,21 @@ RSpec.describe GgxrdDotCom::Parsers::PlayLogDiv do
   describe "#opponent_name" do
     let(:subject) { instance.opponent_name }
 
-    context "when it exists" do
-      let(:opponent_name) { "ねこねこ" }
+    it { is_expected.to eq opponent_name }
+
+    context "when opponent has a guild" do
+      let(:opponent_has_guild?) { true }
       it { is_expected.to eq opponent_name }
     end
 
-    context "when do not exists" do
+    context "when it is blank" do
       let(:opponent_name) { "" }
       it { is_expected.to eq opponent_name }
+    end
+
+    context "when opponent not signed" do
+      let(:opponent_signed?) { false }
+      it { is_expected.to eq "GG PLAYER" }
     end
 
     include_examples "unexpected html structure"
@@ -188,14 +184,21 @@ RSpec.describe GgxrdDotCom::Parsers::PlayLogDiv do
   describe "#opponent_profile_url" do
     let(:subject) { instance.opponent_profile_url }
 
-    context "when it exists" do
-      let(:opponent_profile_url) { "http://ggxrd.com/fugefuge/hogehoge/123" }
+    it { is_expected.to eq opponent_profile_url }
+
+    context "when opponent has a guild" do
+      let(:opponent_has_guild?) { true }
       it { is_expected.to eq opponent_profile_url }
     end
 
-    context "when do not exists" do
+    context "when it is blank" do
       let(:opponent_profile_url) { "" }
       it { is_expected.to eq opponent_profile_url }
+    end
+
+    context "when opponent not signed" do
+      let(:opponent_signed?) { false }
+      it { is_expected.to eq "" }
     end
 
     include_examples "unexpected html structure"

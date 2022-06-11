@@ -6,7 +6,7 @@ module GgxrdDotCom
       attr_accessor :logs
 
       def self.create(parser)
-        new(results: parser.play_logs.map {|m| Log.create(m) })
+        new(logs: parser.play_logs.map {|m| Log.create(m) })
       end
 
       validates :logs, is_a: {type: Array}, nested: true
