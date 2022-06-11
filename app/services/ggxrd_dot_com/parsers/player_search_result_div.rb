@@ -20,7 +20,7 @@ module GgxrdDotCom
       private
 
       def anchor
-        @anchor ||= node.xpath("div[@class='searchResultList']/a").first || (raise UnexpectedStructureError)
+        @anchor ||= node.xpath("a").first || (raise UnexpectedStructureError)
       end
     end
   end

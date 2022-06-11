@@ -3,9 +3,10 @@
 require "rails_helper"
 
 RSpec.describe GgxrdDotCom::Parsers::PlayerSearchResultDiv do
+  let(:node) { Nokogiri::HTML::DocumentFragment.parse(html).elements.first }
+
   describe "#url" do
     subject { described_class.new(node).url }
-    let(:node) { Nokogiri::HTML::DocumentFragment.parse(html) }
     let(:html) { "<div class='searchResultList'><a href='#{url}'>GG PLAYER</a></div>" }
 
     context "when url exists" do
@@ -18,12 +19,11 @@ RSpec.describe GgxrdDotCom::Parsers::PlayerSearchResultDiv do
       it { is_expected.to eq("") }
     end
 
-    include_examples "unexpected html structure", "<div><a href='foo/bar'>GG PLAYER</a></div>"
+    include_examples "unexpected html structure", "<div><span>GG PLAYER</span></div>"
   end
 
   describe "#player_name" do
     subject { described_class.new(node).player_name }
-    let(:node) { Nokogiri::HTML::DocumentFragment.parse(html) }
     let(:html) { "<div class='searchResultList'><a href='http://foo/bar'>#{player_name}</a></div>" }
 
     context "when player_name exists" do
@@ -36,6 +36,6 @@ RSpec.describe GgxrdDotCom::Parsers::PlayerSearchResultDiv do
       it { is_expected.to eq("") }
     end
 
-    include_examples "unexpected html structure", "<div><a href='foo/bar'>GG PLAYER</a></div>"
+    include_examples "unexpected html structure", "<div><span>GG PLAYER</span></div>"
   end
 end

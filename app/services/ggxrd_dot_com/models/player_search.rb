@@ -20,7 +20,7 @@ module GgxrdDotCom
         end
 
         def profile_url=(str)
-          @url = ProfileUrl.new(str)
+          @profile_url = ProfileUrl.new(url: str)
         end
 
         validates :player_name, presence: true
