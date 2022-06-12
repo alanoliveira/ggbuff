@@ -96,4 +96,7 @@ RSpec.configure do |config|
 
   # Autoload support files
   Dir["./spec/support/**/*.rb"].sort.each {|f| require f }
+
+  # enable use not_change
+  RSpec::Matchers.define_negated_matcher :not_change, :change
 end
