@@ -22,7 +22,7 @@ FactoryBot.define do
     opponent_rank { GgxrdDotCom::Models::Enums::RANKS.keys.sample }
     player_char { GgxrdDotCom::Models::Enums::CHAR_NAMES.keys.sample }
     opponent_char { GgxrdDotCom::Models::Enums::CHAR_NAMES.keys.sample }
-    sequence(:play_date) {|n| n.minutes.ago.strftime("%m/%d %H:%M") }
+    sequence(:play_date) {|n| (n * 5).minutes.ago.strftime("%m/%d %H:%M") }
     shop_name { "My House Game Center" }
     opponent_rand = [1, 2].sample
     opponent_name { "GG PLAYER #{opponent_rand}" }

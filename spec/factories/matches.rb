@@ -39,7 +39,7 @@ FactoryBot.define do
   factory :match do
     store { create(:store) }
     player { create(:player) }
-    opponent { create(:player, name: "Rival") }
+    opponent { create(:player, player_name: "Rival") }
     player_char { :KY }
     opponent_char { :SO }
     player_rank { 1 }
