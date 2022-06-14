@@ -36,5 +36,13 @@ RSpec.describe MatchesLoader do
         expect { subject }.not_to(change { Match.count })
       end
     end
+
+    fcontext "when some error occur during the loading" do
+      before { allow(api).to receive(:matches).with(2).and_raise(GgxrdDotCom::Parsers::Error) }
+
+      it do
+        expect { subject }.to(raise_error(GgxrdDotCom::Parsers::Error).and(not_change { Match.count }))
+      end
+    end
   end
 end
