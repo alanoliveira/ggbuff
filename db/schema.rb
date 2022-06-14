@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_11_161032) do
+ActiveRecord::Schema.define(version: 2022_06_14_152908) do
+
+  create_table "match_load_processes", force: :cascade do |t|
+    t.integer "state", default: 0
+    t.integer "player_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_match_load_processes_on_player_id"
+  end
 
   create_table "matches", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -25,6 +33,8 @@ ActiveRecord::Schema.define(version: 2022_06_11_161032) do
     t.datetime "played_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "match_load_process_id", null: false
+    t.index ["match_load_process_id"], name: "index_matches_on_match_load_process_id"
     t.index ["opponent_char"], name: "index_matches_on_opponent_char"
     t.index ["opponent_id"], name: "index_matches_on_opponent_id"
     t.index ["opponent_rank"], name: "index_matches_on_opponent_rank"
@@ -51,6 +61,8 @@ ActiveRecord::Schema.define(version: 2022_06_11_161032) do
     t.index ["name"], name: "index_stores_on_name"
   end
 
+  add_foreign_key "match_load_processes", "players"
+  add_foreign_key "matches", "match_load_processes"
   add_foreign_key "matches", "players"
   add_foreign_key "matches", "players", column: "opponent_id"
   add_foreign_key "matches", "stores"
