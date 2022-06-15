@@ -31,6 +31,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # HTTP Client
 gem "httparty", "~> 0.17.0"
 
+# State machine
+gem "aasm"
+
 group :development, :test do
   # Rspec
   gem "rspec-collection_matchers"
