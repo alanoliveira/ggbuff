@@ -1,6 +1,6 @@
-class CreateMatchLoadProcesses < ActiveRecord::Migration[6.1]
+class CreateMatchesLoadProcesses < ActiveRecord::Migration[6.1]
   def change
-    create_table :match_load_processes do |t|
+    create_table :matches_load_processes do |t|
       t.integer :state, default: 0
       t.references :player, null: false, foreign_key: true
 

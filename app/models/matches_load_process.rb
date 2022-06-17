@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: match_load_processes
+# Table name: matches_load_processes
 #
 #  id         :integer          not null, primary key
 #  state      :integer          default("created")
@@ -12,13 +12,13 @@
 #
 # Indexes
 #
-#  index_match_load_processes_on_player_id  (player_id)
+#  index_matches_load_processes_on_player_id  (player_id)
 #
 # Foreign Keys
 #
 #  player_id  (player_id => players.id)
 #
-class MatchLoadProcess < ApplicationRecord
+class MatchesLoadProcess < ApplicationRecord
   include AASM
   belongs_to :player
   attr_accessor :ggxrd_dot_com_api

@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: match_load_processes
+# Table name: matches_load_processes
 #
 #  id         :integer          not null, primary key
 #  state      :integer          default("created")
@@ -12,15 +12,14 @@
 #
 # Indexes
 #
-#  index_match_load_processes_on_player_id  (player_id)
+#  index_matches_load_processes_on_player_id  (player_id)
 #
 # Foreign Keys
 #
 #  player_id  (player_id => players.id)
 #
-FactoryBot.define do
-  factory :match_load_process do
-    state { :created }
-    player { create(:player) }
-  end
+require "rails_helper"
+
+RSpec.describe MatchesLoadProcess, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

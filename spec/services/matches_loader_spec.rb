@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe MatchesLoader do
-  let(:instance) { described_class.new(match_load_process) }
+  let(:instance) { described_class.new(matches_load_process) }
   let(:api) { instance_double(GgxrdDotCom::Api) }
-  let(:match_load_process) { create(:match_load_process, ggxrd_dot_com_api: api) }
+  let(:matches_load_process) { create(:matches_load_process, ggxrd_dot_com_api: api) }
 
   describe "#load_matches" do
     subject { instance.load_matches }
