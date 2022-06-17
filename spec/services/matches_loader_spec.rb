@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe MatchesLoader do
-  let(:instance) { described_class.new(api, player) }
+  let(:instance) { described_class.new(match_load_process) }
   let(:api) { instance_double(GgxrdDotCom::Api) }
-  let(:player) { create(:player) }
+  let(:match_load_process) { create(:match_load_process, ggxrd_dot_com_api: api) }
 
   describe "#load_matches" do
     subject { instance.load_matches }
@@ -37,7 +37,7 @@ RSpec.describe MatchesLoader do
       end
     end
 
-    fcontext "when some error occur during the loading" do
+    context "when some error occur during the loading" do
       before { allow(api).to receive(:matches).with(2).and_raise(GgxrdDotCom::Parsers::Error) }
 
       it do

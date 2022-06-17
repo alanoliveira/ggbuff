@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class MatchesLoader
-  def initialize(ggxrd_dot_com_api, player)
-    @api = ggxrd_dot_com_api
-    @player = player
+  def initialize(match_load_process)
+    @match_load_process = match_load_process
   end
 
   def load_matches
@@ -14,6 +13,7 @@ class MatchesLoader
 
         # As we don't have the ggxrd.com id for store, is better not use it to find_or_initialize
         match.store = load_store(m)
+        match.match_load_process = match_load_process
         match.save
       end
     end
@@ -21,12 +21,12 @@ class MatchesLoader
 
   private
 
-  attr_reader :api, :player
+  attr_reader :match_load_process
 
   def api_matches
     Enumerator.new do |enum|
       (1..).each do |page|
-        matches = api.matches(page)
+        matches = match_load_process.ggxrd_dot_com_api.matches(page)
         break if matches.logs.empty?
 
         matches.logs.each do |l|
@@ -46,12 +46,12 @@ class MatchesLoader
       result:        match.result,
       played_at:     match.play_date.to_date_time,
       opponent:      load_opponent(match),
-      player:        player
+      player:        match_load_process.player
     )
   end
 
   def load_opponent(match)
-    return if match.opponent_profile_url.nil?
+    return if match.opponent_profile_url.url.blank?
 
     opponent = Player.lock.find_or_initialize_by(ggxrd_user_id: match.opponent_profile_url.id)
     opponent.update(player_name: match.opponent_name)
