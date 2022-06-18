@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_14_152908) do
+ActiveRecord::Schema.define(version: 2022_06_18_073431) do
 
   create_table "matches", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2022_06_14_152908) do
     t.integer "player_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "error_description"
     t.index ["player_id"], name: "index_matches_load_processes_on_player_id"
   end
 

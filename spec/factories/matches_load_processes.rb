@@ -4,11 +4,12 @@
 #
 # Table name: matches_load_processes
 #
-#  id         :integer          not null, primary key
-#  state      :integer          default("created")
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  player_id  :integer          not null
+#  id                :integer          not null, primary key
+#  error_description :string
+#  state             :integer          default("created")
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  player_id         :integer          not null
 #
 # Indexes
 #
