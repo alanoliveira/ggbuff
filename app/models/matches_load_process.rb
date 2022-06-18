@@ -32,7 +32,9 @@ class MatchesLoadProcess < ApplicationRecord
     state :error
     state :finished
 
-    error_on_all_events { update!(state: :error) }
+    after_all_transitions do
+      Rails.logger.debug "[STATE_MACHINE] changing #{self.class}:#{id} from #{aasm.from_state} to #{aasm.to_state}"
+    end
 
     event :load do
       after do
