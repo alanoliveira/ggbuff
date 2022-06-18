@@ -34,6 +34,9 @@ gem "httparty", "~> 0.17.0"
 # State machine
 gem "aasm"
 
+# Frontend stuffs
+gem "slim"
+
 group :development, :test do
   # Rspec
   gem "rspec-collection_matchers"
