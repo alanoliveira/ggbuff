@@ -2,6 +2,9 @@
 
 module GgxrdDotCom
   class Client
+    class ClientError < StandardError; end
+    class InMaintenanceError < ClientError; end
+
     include HTTParty
     base_uri "http://www.ggxrd.com/pg2"
     follow_redirects false
@@ -74,12 +77,19 @@ module GgxrdDotCom
 
     private
 
+    IN_MAINTENANCE_TEXT = "メンテナンス中は当サイトをご利用になれません。ご了承ください。"
+
     def request(method, *args)
       response = self.class.send(method, *args)
+      validate_response!(response)
       cookies = response.get_fields("Set-Cookie") || []
       cookies.each {|c| self.class.default_cookies.add_cookies(c) }
 
       response.response
+    end
+
+    def validate_response!(response)
+      raise InMaintenanceError if response.body.include?(IN_MAINTENANCE_TEXT)
     end
   end
 end
