@@ -17,16 +17,12 @@ RSpec.describe GgxrdDotCom::Api do
     subject { instance.login("user", "password") }
     let(:response) { Net::HTTPFound.new(1.0, "302", "Found") }
 
-    before { allow(cli).to receive(:login).and_return(response) }
-
-    it { is_expected.to be true }
-
-    context "when login fails" do
-      # Yes, it returns 200 when login fails
-      let(:response) { Net::HTTPOK.new(1.0, "200", "OK") }
-
-      it { is_expected.to be false }
+    before do
+      allow(response).to receive(:body)
+      allow(cli).to receive(:login).and_return(response)
     end
+
+    it { is_expected.to be_a(GgxrdDotCom::Models::LoginResult) }
   end
 
   describe "#my_id?" do

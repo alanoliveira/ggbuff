@@ -12,7 +12,10 @@ module GgxrdDotCom
 
     def login(login, password)
       login_resp = cli.login(login, password)
-      login_resp.is_a?(Net::HTTPFound)
+
+      parser = GgxrdDotCom::Parsers::LoginResultPage.new(login_resp.body)
+
+      GgxrdDotCom::Models::LoginResult.create(parser)
     end
 
     def my_id?(id)
