@@ -1,5 +1,5 @@
 doctype html
-html
+html.h-100
   head
     title Ggbuff
     meta name="viewport" content="width=device-width,initial-scale=1"
@@ -8,5 +8,13 @@ html
 
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body
-    = yield
+  body.d-flex.flex-column.h-100
+    = render "layouts/header"
+    main.flex-shrink-0
+      .container.class
+        - flash.each do |k, v|
+          .alert.alert-dismissible.fade.show.m-3 role="alert" class="#{flash_alert_class(k)}"
+            = v
+            button.btn-close type="button" data-bs-dismiss="alert" aria-label="close"
+        = yield 
+    = render "layouts/footer"
