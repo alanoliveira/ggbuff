@@ -1,20 +1,24 @@
 doctype html
-html.h-100
+html
   head
-    title Ggbuff
+    title GG Buff
     meta name="viewport" content="width=device-width,initial-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
 
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body.d-flex.flex-column.h-100
+  body
     = render "layouts/header"
-    main.flex-shrink-0
-      .container.class
-        - flash.each do |k, v|
-          .alert.alert-dismissible.fade.show.m-3 role="alert" class="#{flash_alert_class(k)}"
-            = v
-            button.btn-close type="button" data-bs-dismiss="alert" aria-label="close"
-        = yield 
+    main
+      .container
+        .row
+          .col
+            - flash.each do |type, message|
+              .alert.alert-dismissible.fade.show.m-3 role="alert" class="alert-#{type}"
+                = message
+                button.btn-close type="button" data-bs-dismiss="alert" aria-label="close"
+        .row
+          .col
+            = yield 
     = render "layouts/footer"

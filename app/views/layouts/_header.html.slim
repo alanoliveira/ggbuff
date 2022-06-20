@@ -5,8 +5,14 @@ header
       button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
         span.navbar-toggler-icon
       .collapse.navbar-collapse id="navbarNav"
-        ul.navbar-nav
+        ul.navbar-nav.me-auto
           li.nav-item
             a.nav-link.active href="/" LINK1
           li.nav-item
             a.nav-link href="/" LINK2
+        - if player_signed_in?
+          .dropdown
+            a.d-block.link-dark.text-decoration-none.dropdown-toggle href="#" id="navbarProfileMenuLink" data-bs-toggle="dropdown" aria-expanded="false"
+              = current_player.player_name
+            ul.dropdown-menu.dropdown-menu-end.text-small aria-labelledby="navbarProfileMenuLink"
+              = link_to t('layouts.headers.logout'), "/#", class: "dropdown-item"
