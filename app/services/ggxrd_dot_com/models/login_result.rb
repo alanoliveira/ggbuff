@@ -6,7 +6,7 @@ module GgxrdDotCom
       attr_accessor :error_description, :aime_list
 
       def login_errors
-        error_description.to_s.split("<br>").map(&:strip).select {|s| s.starts_with?("・") }
+        error_description.to_s.split("\n").map(&:strip).select {|s| s.starts_with?("・") }
       end
 
       def self.create(parser)

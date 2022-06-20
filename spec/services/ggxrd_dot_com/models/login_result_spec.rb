@@ -11,8 +11,8 @@ RSpec.describe GgxrdDotCom::Models::LoginResult do
     context "when error_description have some errors" do
       let(:error_description) do
         <<-HEREDOC
-      ログインに失敗しました。以下の原因が考えられます。<br>
-      ・アクセス過多のため、このID／ネットワークが制限されている。<br>
+      ログインに失敗しました。以下の原因が考えられます。
+      ・アクセス過多のため、このID／ネットワークが制限されている。
       ・SEGA ID、パスワードが間違っている。
         HEREDOC
       end

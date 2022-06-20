@@ -16,16 +16,21 @@ RSpec.describe GgxrdDotCom::Parsers::LoginResultPage do
       let(:html) do
         <<~HTML.chomp
           <div class="loginBox">
-          <div class="caution">
-          ログインに失敗しました。以下の原因が考えられます。<br>
-          ・アクセス過多のため、このID／ネットワークが制限されている。<br>
-          ・SEGA ID、パスワードが間違っている。
-          </div>
+            <div class="caution">
+            ログインに失敗しました。以下の原因が考えられます。<br>
+            ・アクセス過多のため、このID／ネットワークが制限されている。<br>
+            ・SEGA ID、パスワードが間違っている。
+            </div>
           </div>
         HTML
       end
 
-      it { is_expected.not_to be_empty }
+      it do
+        is_expected.to include("ログインに失敗しました。以下の原因が考えられます。")
+          .and include("・アクセス過多のため、このID／ネットワークが制限されている。")
+          .and include("・SEGA ID、パスワードが間違っている。")
+        is_expected.not_to match(%r{<br/?>}) # xpath(...).text remove the <br>
+      end
     end
   end
 
