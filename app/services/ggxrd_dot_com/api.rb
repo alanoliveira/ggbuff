@@ -6,6 +6,8 @@ module GgxrdDotCom
 
     attr_reader :cli
 
+    delegate :cookies, to: :cli
+
     def initialize(cli)
       @cli = cli
     end

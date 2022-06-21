@@ -5,8 +5,8 @@ class PlayerLoader
   class UserIdNotFoundError < Error; end
   MAX_SEARCH_PLAYER_PAGE = 2
 
-  def initialize(ggxrd_dot_com_api)
-    @api = ggxrd_dot_com_api
+  def initialize(ggxrd_api)
+    @api = ggxrd_api
   end
 
   def load_player

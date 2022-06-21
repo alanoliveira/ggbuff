@@ -22,7 +22,7 @@
 class MatchesLoadProcess < ApplicationRecord
   include AASM
   belongs_to :player
-  attr_accessor :ggxrd_dot_com_api
+  attr_accessor :ggxrd_api
 
   enum state: {created: 0, loading: 10, error: 90, finished: 100}
 
@@ -41,7 +41,7 @@ class MatchesLoadProcess < ApplicationRecord
         MatchesLoader.new(self).load_matches
       end
 
-      transitions from: :created, to: :loading, guard: -> { ggxrd_dot_com_api.present? }
+      transitions from: :created, to: :loading, guard: -> { ggxrd_api.present? }
     end
 
     event :finish do

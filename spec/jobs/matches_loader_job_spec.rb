@@ -8,8 +8,7 @@ RSpec.describe MatchesLoaderJob, type: :job do
     let(:matches_load_process) { create(:matches_load_process) }
 
     before do
-      allow(GgxrdDotCom::Client).to receive(:new)
-      allow(GgxrdDotCom::Api).to receive(:new)
+      allow(GgxrdApi).to receive(:new)
       allow(MatchesLoadProcess).to receive(:find).with(matches_load_process.id).and_return matches_load_process
       allow(matches_load_process).to receive(:load!)
       allow(matches_load_process).to receive(:finish!)
@@ -23,7 +22,7 @@ RSpec.describe MatchesLoaderJob, type: :job do
 
     context "when some error happens during loading process" do
       before do
-        allow(GgxrdDotCom::Client).to receive(:new).and_raise StandardError
+        allow(matches_load_process).to receive(:load!).and_raise StandardError
       end
 
       it do

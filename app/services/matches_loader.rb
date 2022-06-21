@@ -26,7 +26,7 @@ class MatchesLoader
   def api_matches
     Enumerator.new do |enum|
       (1..).each do |page|
-        matches = matches_load_process.ggxrd_dot_com_api.matches(page)
+        matches = matches_load_process.ggxrd_api.matches(page)
         break if matches.logs.empty?
 
         matches.logs.each do |l|
