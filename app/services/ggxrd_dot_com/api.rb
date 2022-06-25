@@ -12,8 +12,8 @@ module GgxrdDotCom
       @cli = cli
     end
 
-    def login(login, password)
-      login_resp = cli.login(login, password)
+    def login(login, password, remember_me=1)
+      login_resp = cli.login(login, password, remember_me)
 
       parser = GgxrdDotCom::Parsers::LoginResultPage.new(login_resp.body)
 

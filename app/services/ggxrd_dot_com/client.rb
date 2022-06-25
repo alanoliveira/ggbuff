@@ -22,7 +22,7 @@ module GgxrdDotCom
       request(:get, "/index.php")
     end
 
-    def login(login, password)
+    def login(login, password, autologin)
       Rails.logger.debug { "[GGXRD-CLI] [login] user = #{login}" }
 
       request(:post,
@@ -30,7 +30,7 @@ module GgxrdDotCom
               query: {c: Time.now.to_i},
               body:  {login_id:  login,
                       password:  password,
-                      autologin: 0,
+                      autologin: autologin,
                       btn_login: "ログイン"})
     end
 

@@ -17,6 +17,11 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
+# Don't care about OpenStruct performance in test files 
+Style/OpenStructUse:
+  Exclude:
+    - 'spec/**/*'
+
 # Can't avoid write some japanese comments once the source of data is a japanese site
 Style/AsciiComments:
   Enabled: false

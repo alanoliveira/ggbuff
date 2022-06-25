@@ -43,10 +43,13 @@ describe ApplicationController, type: :controller do
     before do
       I18n.available_locales = %i[en ja pt]
       I18n.default_locale = :ja
-      I18n.with_locale :pt
     end
 
-    it { expect { subject.set_locale }.to change { I18n.locale }.to(I18n.default_locale) }
+    it do
+      I18n.with_locale(:pt) do
+        expect { subject.set_locale }.to change { I18n.locale }.to(I18n.default_locale)
+      end
+    end
 
     context "when param locale is used" do
       before do
@@ -55,7 +58,9 @@ describe ApplicationController, type: :controller do
       end
 
       it do
-        expect { subject.set_locale }.to change { I18n.locale }.to(:en)
+        I18n.with_locale(:pt) do
+          expect { subject.set_locale }.to change { I18n.locale }.to(:en)
+        end
       end
     end
 
@@ -65,7 +70,9 @@ describe ApplicationController, type: :controller do
       end
 
       it do
-        expect { subject.set_locale }.to change { I18n.locale }.to(:en)
+        I18n.with_locale(:pt) do
+          expect { subject.set_locale }.to change { I18n.locale }.to(:en)
+        end
       end
     end
   end
