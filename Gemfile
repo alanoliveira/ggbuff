@@ -31,12 +31,14 @@ gem "bootsnap", ">= 1.4.4", require: false
 # HTTP Client
 gem "httparty", "~> 0.17.0"
 
+# Hash with steroids
 gem "hashie"
 
 # State machine
 gem "aasm"
 
 # Frontend stuffs
+gem "kaminari"
 gem "slim"
 
 group :development, :test do
