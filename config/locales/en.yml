@@ -34,3 +34,16 @@ en:
   layouts:
     headers:
       logout: logout
+  activemodel:
+    models:
+      login: login
+    attributes:
+      login:
+        sega_id: "SEGA ID"
+        password: "password"
+        remember_me: "remember me"
+        login_result: "ggxrd.com"
+  helpers:
+    submit:
+      login:
+        create: "login"

@@ -3,3 +3,16 @@ ja:
   layouts:
     headers:
       logout: "ログアウト"
+  activemodel:
+    models:
+      login: "ログイン"
+    attributes:
+      login:
+        sega_id: "SEGA ID"
+        password: "パスワード"
+        remember_me: "ログインしたままにする"
+        login_result: "ggxrd.com"
+  helpers:
+    submit:
+      login:
+        create: "ログイン"
