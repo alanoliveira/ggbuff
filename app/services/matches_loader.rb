@@ -44,7 +44,7 @@ class MatchesLoader
       player_rank:   match.player_rank,
       rank_change:   match.rank_change,
       result:        match.result,
-      played_at:     match.play_date.to_date_time,
+      played_at:     match.play_date.to_datetime,
       opponent:      load_opponent(match),
       player:        matches_load_process.player
     )

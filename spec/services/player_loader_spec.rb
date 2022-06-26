@@ -8,7 +8,7 @@ RSpec.describe PlayerLoader do
 
   describe "#load_player" do
     subject { instance.load_player }
-    let(:my_ggxrd_id) { 5 }
+    let(:my_ggxrd_id) { "5" }
     let(:my_player_name) { "Baiken Player" }
     let(:my_profile_url) { "member_profile_view.php?user_id=#{my_ggxrd_id}" }
     let(:my_profile) { build(:ggxrd_dot_com_profile, player_name: my_player_name) }

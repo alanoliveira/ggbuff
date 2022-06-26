@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module GgxrdDotCom
-  module Models
+  module Values
     module Enums
       RANKS = %w[初段 2段 3段 4段 5段 6段 7段 8段 9段 10段 11段 12段 13段
                  14段 15段 16段 17段 18段 19段 20段 21段 22段 23段 24段
@@ -34,6 +34,9 @@ module GgxrdDotCom
         "\u6885\u55A7"                               => :BA, # 梅喧
         "\u30A2\u30F3\u30B5\u30FC"                   => :AN  # アンサー
       }.freeze
+
+      PLAY_LOG_RESULTS = {"win" => :win, "lose" => :lose}.freeze
+      PLAY_LOG_RANK_DIRECTIONS = {"img/rank_up.png" => :rank_up, "img/rank_down.png" => :rank_down}.freeze
     end
   end
 end

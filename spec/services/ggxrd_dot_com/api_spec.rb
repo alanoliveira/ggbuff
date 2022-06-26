@@ -22,7 +22,7 @@ RSpec.describe GgxrdDotCom::Api do
       allow(cli).to receive(:login).and_return(response)
     end
 
-    it { is_expected.to be_a(GgxrdDotCom::Models::LoginResult) }
+    it { is_expected.to be_a(GgxrdDotCom::Values::LoginResult) }
   end
 
   describe "#my_id?" do
@@ -43,15 +43,17 @@ RSpec.describe GgxrdDotCom::Api do
   describe "#profile" do
     subject { instance.profile }
     let(:response) { Net::HTTPOK.new(1.0, "200", "OK") }
+    let(:profile) { build(:ggxrd_dot_com_profile) }
 
     before do
       allow(response).to receive(:body)
       allow(cli).to receive(:profile).and_return(response)
       allow(GgxrdDotCom::Parsers::ProfilePage).to receive(:new)
-      allow(GgxrdDotCom::Models::Profile).to receive(:create).and_return(GgxrdDotCom::Models::Profile.new)
+      allow(GgxrdDotCom::Values::Profile).to receive(:new).and_return(profile)
+      allow(profile).to receive(:populate)
     end
 
-    it { is_expected.to be_a(GgxrdDotCom::Models::Profile) }
+    it { is_expected.to be_a(GgxrdDotCom::Values::Profile) }
 
     include_context "when ggxrd.com return a non 200 response"
   end
@@ -59,15 +61,17 @@ RSpec.describe GgxrdDotCom::Api do
   describe "#matches" do
     subject { instance.matches }
     let(:response) { Net::HTTPOK.new(1.0, "200", "OK") }
+    let(:play_log) { build(:ggxrd_dot_com_play_log) }
 
     before do
       allow(response).to receive(:body)
       allow(cli).to receive(:play_log).and_return(response)
       allow(GgxrdDotCom::Parsers::PlayLogPage).to receive(:new)
-      allow(GgxrdDotCom::Models::PlayLog).to receive(:create).and_return(GgxrdDotCom::Models::PlayLog.new)
+      allow(GgxrdDotCom::Values::PlayLog).to receive(:new).and_return(play_log)
+      allow(play_log).to receive(:populate)
     end
 
-    it { is_expected.to be_a(GgxrdDotCom::Models::PlayLog) }
+    it { is_expected.to be_a(GgxrdDotCom::Values::PlayLog) }
 
     include_context "when ggxrd.com return a non 200 response"
   end
@@ -75,15 +79,17 @@ RSpec.describe GgxrdDotCom::Api do
   describe "#search_player" do
     subject { instance.search_player("GG Player") }
     let(:response) { Net::HTTPOK.new(1.0, "200", "OK") }
+    let(:player_search) { build(:ggxrd_dot_com_player_search) }
 
     before do
       allow(response).to receive(:body)
       allow(cli).to receive(:player_search).and_return(response)
       allow(GgxrdDotCom::Parsers::PlayerSearchPage).to receive(:new)
-      allow(GgxrdDotCom::Models::PlayerSearch).to receive(:create).and_return(GgxrdDotCom::Models::PlayerSearch.new)
+      allow(GgxrdDotCom::Values::PlayerSearch).to receive(:new).and_return(player_search)
+      allow(player_search).to receive(:populate)
     end
 
-    it { is_expected.to be_a(GgxrdDotCom::Models::PlayerSearch) }
+    it { is_expected.to be_a(GgxrdDotCom::Values::PlayerSearch) }
 
     include_context "when ggxrd.com return a non 200 response"
   end

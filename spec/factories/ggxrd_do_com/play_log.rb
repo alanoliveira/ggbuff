@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :ggxrd_dot_com_play_log, class: GgxrdDotCom::Models::PlayLog do
+  factory :ggxrd_dot_com_play_log, class: GgxrdDotCom::Values::PlayLog do
     logs { [] }
 
     initialize_with { new(attributes) }
@@ -15,14 +15,16 @@ FactoryBot.define do
     end
   end
 
-  factory :ggxrd_dot_com_play_log_log, class: GgxrdDotCom::Models::PlayLog::Log do
-    result { GgxrdDotCom::Models::PlayLog::Log::RESULTS.keys.sample }
-    rank_change { GgxrdDotCom::Models::PlayLog::Log::RANK_DIRECTIONS.keys.push(nil).sample }
-    player_rank { GgxrdDotCom::Models::Enums::RANKS.keys.sample }
-    opponent_rank { GgxrdDotCom::Models::Enums::RANKS.keys.sample }
-    player_char { GgxrdDotCom::Models::Enums::CHAR_NAMES.keys.sample }
-    opponent_char { GgxrdDotCom::Models::Enums::CHAR_NAMES.keys.sample }
-    sequence(:play_date) {|n| (n * 5).minutes.ago.strftime("%m/%d %H:%M") }
+  factory :ggxrd_dot_com_play_log_log, class: GgxrdDotCom::Values::PlayLog::Log do
+    result { GgxrdDotCom::Values::Enums::PLAY_LOG_RESULTS.keys.sample }
+    rank_change { GgxrdDotCom::Values::Enums::PLAY_LOG_RANK_DIRECTIONS.keys.push(nil).sample }
+    player_rank { GgxrdDotCom::Values::Enums::RANKS.keys.sample }
+    opponent_rank { GgxrdDotCom::Values::Enums::RANKS.keys.sample }
+    player_char { GgxrdDotCom::Values::Enums::CHAR_NAMES.keys.sample }
+    opponent_char { GgxrdDotCom::Values::Enums::CHAR_NAMES.keys.sample }
+    sequence(:play_date) {|n|
+      (n * 5).minutes.ago.strftime("#{GgxrdDotCom::Values::PlayLog::Log::DUMMY_PLAY_DATE_YEAR}/%m/%d %H:%M")
+    }
     shop_name { "My House Game Center" }
     opponent_rand = [1, 2].sample
     opponent_name { "GG PLAYER #{opponent_rand}" }

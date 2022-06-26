@@ -2,11 +2,14 @@
 
 require "rails_helper"
 
-RSpec.describe GgxrdDotCom::Models::LoginResult do
-  let(:instance) { described_class.new(error_description: error_description) }
+RSpec.describe GgxrdDotCom::Values::LoginResult do
+  let(:instance) { described_class.new }
 
   describe "#login_errors" do
     subject { instance.login_errors }
+    let(:error_description) { "" }
+
+    before { instance.error_description = error_description }
 
     context "when error_description have some errors" do
       let(:error_description) do

@@ -17,7 +17,9 @@ module GgxrdDotCom
 
       parser = GgxrdDotCom::Parsers::LoginResultPage.new(login_resp.body)
 
-      GgxrdDotCom::Models::LoginResult.create(parser)
+      login_result = GgxrdDotCom::Values::LoginResult.new
+      login_result.populate(parser)
+      login_result
     end
 
     def my_id?(id)
@@ -30,7 +32,9 @@ module GgxrdDotCom
       raise ApiError unless profile_resp.is_a?(Net::HTTPOK)
 
       parser = GgxrdDotCom::Parsers::ProfilePage.new(profile_resp.body)
-      GgxrdDotCom::Models::Profile.create(parser)
+      profile = GgxrdDotCom::Values::Profile.new
+      profile.populate(parser)
+      profile
     end
 
     def matches(page=1)
@@ -38,7 +42,9 @@ module GgxrdDotCom
       raise ApiError unless play_log_resp.is_a?(Net::HTTPOK)
 
       parser = GgxrdDotCom::Parsers::PlayLogPage.new(play_log_resp.body)
-      GgxrdDotCom::Models::PlayLog.create(parser)
+      play_log = GgxrdDotCom::Values::PlayLog.new
+      play_log.populate(parser)
+      play_log
     end
 
     def search_player(player_name, page=1)
@@ -46,7 +52,9 @@ module GgxrdDotCom
       raise ApiError unless player_search_resp.is_a?(Net::HTTPOK)
 
       parser = GgxrdDotCom::Parsers::PlayerSearchPage.new(player_search_resp.body)
-      GgxrdDotCom::Models::PlayerSearch.create(parser)
+      play_seach = GgxrdDotCom::Values::PlayerSearch.new
+      play_seach.populate(parser)
+      play_seach
     end
   end
 end
