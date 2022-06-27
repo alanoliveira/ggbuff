@@ -37,6 +37,9 @@ gem "hashie"
 # State machine
 gem "aasm"
 
+# I18n
+gem "rails-i18n", "~> 6.0" # For 6.x
+
 # Frontend stuffs
 gem "kaminari"
 gem "slim"
