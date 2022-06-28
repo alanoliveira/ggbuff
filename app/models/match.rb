@@ -50,4 +50,9 @@ class Match < ApplicationRecord
   enum player_char: Enums::CHARACTERS, _prefix: true
   enum opponent_char: Enums::CHARACTERS, _prefix: true
   enum result: {win: 1, lose: -1}
+  enum rank_change: {rank_up: 1, rank_down: -1}
+
+  delegate :name, to: :player, prefix: true
+  delegate :name, to: :opponent, prefix: true
+  delegate :name, to: :store, prefix: true
 end

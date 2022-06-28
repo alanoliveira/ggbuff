@@ -48,7 +48,7 @@ FactoryBot.define do
     player_rank { 1 }
     opponent_rank { 1 }
     result { 1 }
-    rank_change { 0 }
+    rank_change { nil }
     played_at { "2019-08-06 21:57:09" }
     matches_load_process { create(:matches_load_process) }
   end

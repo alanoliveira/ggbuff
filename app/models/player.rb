@@ -18,4 +18,6 @@
 class Player < ApplicationRecord
   has_many :matches, dependent: :destroy
   has_many :matches_load_processes, dependent: :destroy
+
+  alias_attribute :name, :player_name
 end
