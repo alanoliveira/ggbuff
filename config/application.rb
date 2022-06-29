@@ -20,8 +20,8 @@ module Ggbuff
     # config.eager_load_paths << Rails.root.join("extras")
     #
 
-    I18n.available_locales = %i[en ja]
-    I18n.default_locale = :ja
+    I18n.available_locales = %i[en]
+    I18n.default_locale = :en
 
     config.generators do |g|
       g.test_framework :rspec
