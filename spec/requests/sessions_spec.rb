@@ -22,20 +22,22 @@ RSpec.describe "Sessions", type: :request do
     include_context "with mocked api login methods"
     let(:player) { create(:player) }
 
-    it "returns http success" do
+    it "returns http redirect" do
       post "/login", params: {login_form: {sega_id: "sega_id", password: "password", remember_me: true}}
       expect(response).to have_http_status(:redirect)
       expect(session).not_to be_empty
     end
 
-    it "when parameters are invalid" do
-      post "/login", params: {login_form: {sega_id: "", password: "", remember_me: true}}
-      expect(response).to have_http_status(:unauthorized)
+    context "when parameters are invalid" do
+      it "returns http unauthorized" do
+        post "/login", params: {login_form: {sega_id: "", password: "", remember_me: true}}
+        expect(response).to have_http_status(:unauthorized)
+      end
     end
   end
 
   describe "GET /logout" do
-    it "returns http success" do
+    it "returns http redirect" do
       get "/logout"
       expect(response).to have_http_status(:redirect)
     end

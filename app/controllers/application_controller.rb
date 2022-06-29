@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   helper_method :current_player, :player_signed_in?
   before_action :set_locale
+  before_action :require_player
 
   def default_url_options
     {locale: I18n.locale}
@@ -31,5 +32,9 @@ class ApplicationController < ActionController::Base
 
   def player_signed_in?
     current_player.present?
+  end
+
+  def require_player
+    redirect_to(login_url) unless player_signed_in?
   end
 end

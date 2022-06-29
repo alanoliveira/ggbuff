@@ -2,6 +2,7 @@
 
 class SessionsController < ApplicationController
   include UsesGgxrdApi
+  skip_before_action :require_player, only: %i[new create]
 
   def new
     redirect_to root_url if player_signed_in?
