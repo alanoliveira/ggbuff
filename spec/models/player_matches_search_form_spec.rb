@@ -2,13 +2,13 @@
 
 require "rails_helper"
 
-RSpec.describe PlayerMatchesFinder do
+RSpec.describe PlayerMatchesSearchForm do
   let(:instance) { described_class.new(player, params) }
   let(:player) { create(:player, player_name: "Baiken Player") }
   let(:params) { {} }
 
-  describe "#execute" do
-    subject { instance.execute }
+  describe "#search" do
+    subject { instance.search }
 
     context "searching without parameters" do
       before do

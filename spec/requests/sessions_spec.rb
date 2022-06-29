@@ -23,9 +23,14 @@ RSpec.describe "Sessions", type: :request do
     let(:player) { create(:player) }
 
     it "returns http success" do
-      post "/login", params: {login: {sega_id: "sega_id", password: "password", remember_me: true}}
+      post "/login", params: {login_form: {sega_id: "sega_id", password: "password", remember_me: true}}
       expect(response).to have_http_status(:redirect)
       expect(session).not_to be_empty
+    end
+
+    it "when parameters are invalid" do
+      post "/login", params: {login_form: {sega_id: "", password: "", remember_me: true}}
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 

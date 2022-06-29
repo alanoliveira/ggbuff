@@ -2,14 +2,14 @@
 
 require "rails_helper"
 
-RSpec.describe Login do
+RSpec.describe LoginForm do
   let(:instance) { described_class.new(sega_id: "sega_id", password: "password") }
 
   describe "#authenticate_api" do
     subject { instance.authenticate_api(api) }
-    let(:api) { spy }
     let(:login_result) { OpenStruct.new(login_errors: login_errors) }
     let(:login_errors) { [] }
+    let(:api) { spy }
 
     before { allow(api).to receive(:login).and_return(login_result) }
 

@@ -36,14 +36,14 @@ en:
       logout: logout
   activemodel:
     models:
-      login: login
+      login_form: login
     attributes:
-      login:
+      login_form:
         sega_id: "SEGA ID"
         password: "password"
         remember_me: "remember me"
         login_result: "ggxrd.com"
   helpers:
     submit:
-      login:
+      login_form:
         create: "login"

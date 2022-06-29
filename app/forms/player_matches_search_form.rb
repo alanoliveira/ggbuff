@@ -1,25 +1,23 @@
 # frozen_string_literal: true
 
-class PlayerMatchesFinder
-  include ActiveModel::Model
+class PlayerMatchesSearchForm < ApplicationForm
+  attribute :player_char, :string
+  attribute :player_rank_min, :integer
+  attribute :player_rank_max, :integer
+  attribute :opponent_name, :string
+  attribute :opponent_name_partial, :boolean
+  attribute :opponent_char, :string
+  attribute :opponent_rank_min, :integer
+  attribute :opponent_rank_max, :integer
+  attribute :played_at_from, :date
+  attribute :played_at_to, :date
 
-  attr_accessor :player_char,
-                :player_rank_min,
-                :player_rank_max,
-                :opponent_name,
-                :opponent_name_partial,
-                :opponent_char,
-                :opponent_rank_min,
-                :opponent_rank_max,
-                :played_at_from,
-                :played_at_to
-
-  def initialize(player, attrs={})
+  def initialize(player, params={})
     @player = player
-    assign_attributes(attrs)
+    super(params)
   end
 
-  def execute
+  def search
     search = player.matches.eager_load(:store, :opponent)
     search = add_search_params_for_player(search)
     search = add_search_params_for_opponent(search)

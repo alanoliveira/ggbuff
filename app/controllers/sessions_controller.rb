@@ -5,11 +5,11 @@ class SessionsController < ApplicationController
 
   def new
     redirect_to root_url if player_signed_in?
-    @login = Login.new
+    @login = LoginForm.new
   end
 
   def create
-    @login = Login.new(login_params)
+    @login = LoginForm.new(login_params)
 
     authenticate_ret = @login.authenticate_api(ggxrd_api)
     update_ggxrd_cookies
@@ -38,6 +38,6 @@ class SessionsController < ApplicationController
   end
 
   def login_params
-    params.require(:login).permit(:sega_id, :password, :remember_me)
+    params.require(:login_form).permit(:sega_id, :password, :remember_me)
   end
 end
