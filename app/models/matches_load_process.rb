@@ -22,6 +22,7 @@
 class MatchesLoadProcess < ApplicationRecord
   include AASM
   belongs_to :player
+  has_many :matches, dependent: :destroy
   attr_accessor :ggxrd_api
 
   enum state: {created: 0, loading: 10, error: 90, finished: 100}

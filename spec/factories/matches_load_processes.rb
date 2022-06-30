@@ -23,5 +23,15 @@ FactoryBot.define do
   factory :matches_load_process do
     state { :created }
     player { create(:player) }
+
+    trait :with_matches do
+      transient do
+        matches_count { 5 }
+      end
+
+      matches {
+        matches_count.times.map { create(:match, player: player, matches_load_process: instance) }
+      }
+    end
   end
 end

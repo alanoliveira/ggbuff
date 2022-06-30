@@ -1,0 +1,87 @@
+.h1
+  = Match.model_name.human(count: 2).titlecase
+
+.row.mb-4
+  .col
+    .card
+      .card-header
+        = PlayerMatchesSearchForm.model_name.human.titlecase
+      .card-body
+        = form_with model: @player_matches_search_form, url: matches_path, local: true, method: :get do |f|
+          .row.mb-3
+            .col-3.text-truncate
+              = f.label :player_char, PlayerMatchesSearchForm.human_attribute_name(:player_char), class: "form-label"
+              = f.select :player_char, Enums::CHARACTERS, {include_blank: t("forms.placeholders.defaults.select")}, class: "form-select"
+            .col-3.text-truncate
+              = f.label :player_rank_min, PlayerMatchesSearchForm.human_attribute_name(:player_rank_min), class: "form-label"
+              = f.select :player_rank_min, Enums::RANKS, {include_blank: t("forms.placeholders.defaults.select")}, class: "form-select"
+            .col-3.text-truncate
+              = f.label :player_rank_max, PlayerMatchesSearchForm.human_attribute_name(:player_rank_max), class: "form-label"
+              = f.select :player_rank_max, Enums::RANKS, {include_blank: t("forms.placeholders.defaults.select")}, class: "form-select"
+          .row.mb-3
+            .col-3.text-truncate
+              = f.label :opponent_name, PlayerMatchesSearchForm.human_attribute_name(:opponent_name), class: "form-label"
+              = f.text_field :opponent_name, class: "form-control"
+            .col-3.text-truncate
+              = f.label :opponent_char, PlayerMatchesSearchForm.human_attribute_name(:opponent_char), class: "form-label"
+              = f.select :opponent_char, Enums::CHARACTERS, {include_blank: t("forms.placeholders.defaults.select")}, class: "form-select"
+            .col-3.text-truncate
+              = f.label :opponent_rank_min, PlayerMatchesSearchForm.human_attribute_name(:opponent_rank_min), class: "form-label"
+              = f.select :opponent_rank_min, Enums::RANKS, {include_blank: t("forms.placeholders.defaults.select")}, class: "form-select"
+            .col-3.text-truncate
+              = f.label :opponent_rank_max, PlayerMatchesSearchForm.human_attribute_name(:opponent_rank_max), class: "form-label"
+              = f.select :opponent_rank_max, Enums::RANKS, {include_blank: t("forms.placeholders.defaults.select")}, class: "form-select"
+          .row.mb-3
+            .col-3.text-truncate
+              = f.label :store_name, PlayerMatchesSearchForm.human_attribute_name(:store_name), class: "form-label"
+              = f.text_field :store_name, class: "form-control"
+            .col-3.text-truncate
+              = f.label :played_at_from, PlayerMatchesSearchForm.human_attribute_name(:played_at_from), class: "form-label"
+              = f.date_field :played_at_from, class: "form-control"
+            .col-3
+              = f.label :played_at_to, PlayerMatchesSearchForm.human_attribute_name(:played_at_to), class: "form-label"
+              = f.date_field :played_at_to, class: "form-control"
+          .row
+            .col
+              = f.submit class: "btn btn-primary mx-1"
+              = link_to t('forms.labels.defaults.reset'), {}, class: "btn btn-secondary mx-1"
+
+.row
+  .col
+    .card
+      .card-header
+        = Match.model_name.human(count: 2).titlecase
+      .card-body
+        .row
+          .table-responsive
+            table.table.table-striped
+              thead
+                tr
+                  th = Match.human_attribute_name(:result)
+                  th = Match.human_attribute_name(:player_char)
+                  th = Match.human_attribute_name(:player_rank)
+                  th = Match.human_attribute_name(:opponent_name)
+                  th = Match.human_attribute_name(:opponent_char)
+                  th = Match.human_attribute_name(:opponent_rank)
+                  th = Match.human_attribute_name(:played_at)
+                  th.d-none.d-lg-table-cell
+                    = Match.human_attribute_name(:store_name)
+              tbody
+                - @matches.each do |m|
+                  tr
+                    td = match_result_badge(m.result)
+                    td = m.player_char
+                    td
+                      = m.player_rank
+                      = rank_change_icon(m.rank_change)
+                    td = m.opponent&.player_name
+                    td = m.opponent_char
+                    td = m.opponent_rank
+                    td = l(m.played_at, format: :short)
+                    td.d-none.d-lg-table-cell
+                      span.text-truncate = m.store.name
+        .row
+          .col.d-none.d-md-block
+            = paginate @matches
+          .col.d-md-none.d-sm-block
+            = paginate @matches, window: 0

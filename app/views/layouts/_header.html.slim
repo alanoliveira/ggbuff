@@ -7,9 +7,11 @@ header
       .collapse.navbar-collapse id="navbarNav"
         ul.navbar-nav.me-auto
           li.nav-item
-            a.nav-link.active href="/" LINK1
-          li.nav-item
-            a.nav-link href="/" LINK2
+            a.nav-link href="/" LINK1
+          - if player_signed_in?
+            li.nav-item
+              a.nav-link href="#{matches_path}" class="#{"active" if current_page?(matches_path)}"
+                = Match.model_name.human(count: 2).titlecase
         - if player_signed_in?
           .dropdown
             a.d-block.link-dark.text-decoration-none.dropdown-toggle href="#" id="navbarProfileMenuLink" data-bs-toggle="dropdown" aria-expanded="false"

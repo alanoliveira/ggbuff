@@ -28,4 +28,6 @@ module Enums
     BA: 24,
     AN: 25
   }.freeze
+
+  RANKS = (1..30).to_a.freeze
 end

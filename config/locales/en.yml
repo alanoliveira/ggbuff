@@ -31,19 +31,60 @@
 
 en:
   hello: "Hello world"
+  forms:
+    labels:
+      defaults:
+        reset: "reset"
+    placeholders:
+      defaults:
+        select: "select"
   layouts:
     headers:
       logout: logout
+  activerecord:
+    models:
+      match: 
+        one: "match"
+        other: "matches"
+    attributes:
+      match:
+        result: "result"
+        results:
+          win: "win"
+          lose: "lose"
+        player_char: "player char"
+        player_rank: "player rank"
+        rank_change: "rank change"
+        opponent_name: "opponent name"
+        opponent_char: "opponent char"
+        opponent_rank: "opponent rank"
+        played_at: "date"
+        store_name: "game center"
   activemodel:
     models:
       login_form: login
+      player_matches_search_form: "search matches"
     attributes:
       login_form:
         sega_id: "SEGA ID"
         password: "password"
         remember_me: "remember me"
         login_result: "ggxrd.com"
+      player_matches_search_form:
+        player_char: "my char"
+        player_rank_min: "my rank(min)"
+        player_rank_max: "my rank(max)"
+        opponent_name: "opponent name"
+        opponent_name_partial: "partial?"
+        opponent_char: "opponent char"
+        opponent_rank_min: "oppnent rank(min)"
+        opponent_rank_max: "opponent rank(max)"
+        store_name: "game center"
+        played_at_from: "played since"
+        played_at_to: "played until"
   helpers:
     submit:
       login_form:
         create: "login"
+      player_matches_search_form:
+        create: "search"
