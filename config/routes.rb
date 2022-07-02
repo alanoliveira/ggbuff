@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "logout", to: "sessions#destroy"
 
   get "matches", to: "player#matches"
+  get "load_matches", to: "player#load_matches"
 
   root to: "player#matches"
 end

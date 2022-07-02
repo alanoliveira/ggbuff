@@ -49,4 +49,8 @@ class MatchesLoadProcess < ApplicationRecord
       transitions from: :loading, to: :finished
     end
   end
+
+  def ended?
+    error? || finished?
+  end
 end

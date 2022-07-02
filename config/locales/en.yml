@@ -31,6 +31,9 @@
 
 en:
   hello: "Hello world"
+  texts:
+    loading_matches: "Your matches data is being loaded."
+    loading_matches_error: "The last try to load your matches had some error. Please try again."
   forms:
     labels:
       defaults:
@@ -41,6 +44,7 @@ en:
   layouts:
     headers:
       logout: logout
+      load_matches: "load matches"
   activerecord:
     models:
       match: 

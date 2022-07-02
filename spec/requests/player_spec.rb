@@ -29,4 +29,59 @@ RSpec.describe "Indices", type: :request do
       end
     end
   end
+
+  describe "GET /load_matches" do
+    context "when player is not logged in" do
+      it do
+        expect { get "/load_matches" }.not_to(change { MatchesLoadProcess.count })
+        expect(response).to have_http_status(:redirect)
+      end
+    end
+
+    context "when the last player matches_load_process not ended" do
+      include_context "with logged in player"
+
+      let(:player) { create(:player) }
+      let(:player_to_log_in) { player }
+
+      before do
+        create(:matches_load_process, player: player, state: :loading)
+      end
+
+      it do
+        expect { get "/load_matches" }.not_to(change { MatchesLoadProcess.count })
+        expect(response).to have_http_status(:redirect)
+      end
+    end
+
+    context "when the last player matches_load_process ended" do
+      include_context "with logged in player"
+
+      let(:player) { create(:player) }
+      let(:player_to_log_in) { player }
+
+      before do
+        create(:matches_load_process, player: player, state: :finished)
+      end
+
+      it do
+        expect { get "/load_matches" }
+          .to change { MatchesLoadProcess.count }.by(1).and have_enqueued_job(MatchesLoaderJob)
+        expect(response).to have_http_status(:redirect)
+      end
+    end
+
+    context "when the player has no last matches_load_process" do
+      include_context "with logged in player"
+
+      let(:player) { create(:player) }
+      let(:player_to_log_in) { player }
+
+      it do
+        expect { get "/load_matches" }
+          .to change { MatchesLoadProcess.count }.by(1).and have_enqueued_job(MatchesLoaderJob)
+        expect(response).to have_http_status(:redirect)
+      end
+    end
+  end
 end
