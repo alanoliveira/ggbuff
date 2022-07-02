@@ -11,6 +11,7 @@ class PlayerController < ApplicationController
   def load_matches
     last_matches_load_process = current_player.matches_load_processes.last
     if last_matches_load_process.nil? || last_matches_load_process.ended?
+      ggxrd_api.profile # validate ggxrd.com auth cookies
       matches_load_process = current_player.matches_load_processes.create
       enqueue_matches_load_process(matches_load_process)
     end

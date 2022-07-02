@@ -31,6 +31,8 @@ RSpec.describe "Indices", type: :request do
   end
 
   describe "GET /load_matches" do
+    before { allow_any_instance_of(GgxrdDotCom::Api).to receive(:profile) }
+
     context "when player is not logged in" do
       it do
         expect { get "/load_matches" }.not_to(change { MatchesLoadProcess.count })

@@ -127,4 +127,34 @@ describe ApplicationController, type: :controller do
       end
     end
   end
+
+  describe "rescue_from GgxrdDotCom::Client::InMaintenanceError" do
+    controller do
+      skip_before_action :require_player
+      def index
+        raise GgxrdDotCom::Client::InMaintenanceError
+      end
+    end
+
+    it do
+      get :index
+      expect(flash).not_to be_empty
+    end
+  end
+
+  describe "rescue_from GgxrdDotCom::Client::NotAuthenticatedError" do
+    before { session[:player_id] = create(:player).id }
+    controller do
+      skip_before_action :require_player
+      def index
+        raise GgxrdDotCom::Client::NotAuthenticatedError
+      end
+    end
+
+    it do
+      get :index
+      expect(session[:player_id]).to be_nil
+      expect(flash).not_to be_empty
+    end
+  end
 end
