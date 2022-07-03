@@ -25,7 +25,7 @@ RSpec.describe "Indices", type: :request do
         get "/matches"
 
         doc = Nokogiri::HTML(response.body)
-        expect(doc.xpath("//tbody/tr").length).to eq 5
+        expect(doc.xpath("//table[@id='match-search-result-table']/tbody/tr").length).to eq 5
       end
     end
   end

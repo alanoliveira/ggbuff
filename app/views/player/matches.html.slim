@@ -47,14 +47,26 @@
               = link_to t('forms.labels.defaults.reset'), {}, class: "btn btn-secondary mx-1"
 
 .row
+  .col.mb-4
+    = render "rivals_card", rivals: MatchRivals.new(@matches), limit: 5
+  .col.mb-4
+    = render "rivals_card", rivals: MatchVictims.new(@matches), limit: 5
+  .col.mb-4
+    = render "rivals_card", rivals: MatchTormentors.new(@matches), limit: 5
+
+.row
   .col
     .card
       .card-header
         = Match.model_name.human(count: 2).titlecase
+        .span.float-end
+          span.text-success = @matches.win.count
+          | - 
+          span.text-danger = @matches.lose.count
       .card-body
         .row
           .table-responsive
-            table.table.table-striped
+            table.table.table-striped id="match-search-result-table"
               thead
                 tr
                   th = Match.human_attribute_name(:result)

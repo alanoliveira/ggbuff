@@ -50,6 +50,22 @@ en:
     headers:
       logout: logout
       load_matches: "load matches"
+  models:
+    classes:
+      score: score
+      match_rivals: rivals
+      match_tormentors: tormentors
+      match_victims: victims
+    attributes:
+      score:
+        player: player
+        opponent: opponent
+        player_char: player char
+        opponent_char: opponent char
+        total: total
+        wins: wins
+        loses: loses
+
   activerecord:
     models:
       match: 

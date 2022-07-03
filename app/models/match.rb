@@ -49,10 +49,14 @@ class Match < ApplicationRecord
   default_scope { order(played_at: :desc) }
   enum player_char: Enums::CHARACTERS, _prefix: true
   enum opponent_char: Enums::CHARACTERS, _prefix: true
-  enum result: {win: 1, lose: -1}
+  enum result: {win: 1, lose: 0}
   enum rank_change: {rank_up: 1, rank_down: -1}
 
   delegate :name, to: :player, prefix: true
   delegate :name, to: :opponent, prefix: true
   delegate :name, to: :store, prefix: true
+
+  scope :rivals, ->(limit=5) { MatchRivals.new(self).search(limit: limit) }
+  scope :victims, ->(limit=5) { MatchVictims.new(self).search(limit: limit) }
+  scope :tormentors, ->(limit=5) { MatchTormentors.new(self).search(limit: limit) }
 end
