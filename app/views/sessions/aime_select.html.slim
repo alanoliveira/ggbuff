@@ -1,0 +1,5 @@
+h1 = t("layouts.session.select_aime")
+- @aime_list.each do |aime|
+  ul.list-group
+    li.list-group-item
+      = link_to aime.aime_name, choose_aime_path(aime_key: aime.id) 

@@ -38,12 +38,13 @@ RSpec.describe GgxrdDotCom::Parsers::LoginResultPage do
     subject { described_class.new(html).aime_list }
 
     context "when html file has a list of aime cards", :aggregate_failures do
-      # TODO: Improve this when get a semple of aime selection page
       let(:html) do
         <<-HTML
-        <a href="/aime_key=1">Aime1</a>
-        <a href="/aime_key=2">Aime2</a>
-        <a href="/aime_key=3">Aime3</a>
+        <ul>
+          <li><a href="/aime_key=1">Aime1<br>111111111111111111</a></li>
+          <li><a href="/aime_key=2">Aime2<br>222222222222222222</a></li>
+          <li><a href="/aime_key=3">Aime3<br>333333333333333333</a></li>
+        </ul>
         HTML
       end
 

@@ -8,7 +8,7 @@ module GgxrdDotCom
 
       def populate(parser)
         self.error_description = parser.error_description
-        self.aime_list = parser.aime_list.each do |a|
+        parser.aime_list.each do |a|
           aime = Aime.new
           aime.populate(a)
           aime_list.push(aime)

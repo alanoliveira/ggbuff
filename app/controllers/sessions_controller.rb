@@ -2,7 +2,7 @@
 
 class SessionsController < ApplicationController
   include UsesGgxrdApi
-  skip_before_action :require_player, only: %i[new create]
+  skip_before_action :require_player, only: %i[new create choose_aime]
 
   def new
     redirect_to root_url if player_signed_in?
@@ -17,7 +17,17 @@ class SessionsController < ApplicationController
 
     return render :new, status: :unauthorized if @login.invalid?
 
-    raise NotImplementedError if authenticate_ret.aime_list.any?
+    @aime_list = authenticate_ret.aime_list
+    return render :aime_select if @aime_list.any?
+
+    load_player
+    redirect_to root_url
+  end
+
+  def choose_aime
+    return redirect_to login_url unless params["aime_key"] && ggxrd_api.select_aime(params["aime_key"])
+
+    update_ggxrd_cookies
 
     load_player
     redirect_to root_url

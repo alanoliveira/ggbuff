@@ -14,7 +14,7 @@ module GgxrdDotCom
       end
 
       def name
-        node.text
+        node.child&.text
       end
     end
   end

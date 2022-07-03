@@ -7,7 +7,7 @@ RSpec.describe GgxrdDotCom::Parsers::AimeSelectionAnchor do
 
   describe "#url" do
     subject { described_class.new(node).url }
-    let(:html) { "<a href='#{url}'>Aime1</a>" }
+    let(:html) { "<a href='#{url}'>Aime1<br>11111111111111111111</a>" }
 
     context "when url exists" do
       let(:url) { "aime_key=222" }
@@ -22,7 +22,7 @@ RSpec.describe GgxrdDotCom::Parsers::AimeSelectionAnchor do
 
   describe "#name" do
     subject { described_class.new(node).name }
-    let(:html) { "<a href='aime_key=222'>#{name}</a>" }
+    let(:html) { "<a href='aime_key=222'>#{name}<br>22222222222222222222</a>" }
 
     context "when name exists" do
       let(:name) { "Aime1" }

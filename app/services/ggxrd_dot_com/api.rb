@@ -22,6 +22,10 @@ module GgxrdDotCom
       login_result
     end
 
+    def select_aime(aime_key)
+      cli.select_aime(aime_key).is_a?(Net::HTTPFound)
+    end
+
     def my_id?(id)
       # when you are logged and try to access you member_profile_view it will redirect you to profile page
       cli.member_profile_view(id).is_a?(Net::HTTPFound)

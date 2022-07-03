@@ -51,4 +51,20 @@ RSpec.describe "Sessions", type: :request do
       end
     end
   end
+
+  describe "GET /choose_aime" do
+    include_context "with mocked api login methods"
+
+    it "when aime_key is not passed" do
+      get "/choose_aime"
+      expect(response).to redirect_to login_path
+    end
+
+    context "with aime_key is passed" do
+      it "redirected to root url" do
+        get "/choose_aime", params: {aime_key: 0}
+      expect(response).to redirect_to root_url
+      end
+    end
+  end
 end

@@ -51,6 +51,8 @@ en:
     headers:
       logout: logout
       load_matches: "load matches"
+    session:
+      select_aime: select your aime card
   models:
     classes:
       score: score

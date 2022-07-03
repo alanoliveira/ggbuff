@@ -8,7 +8,7 @@ module GgxrdDotCom
       end
 
       def aime_list
-        doc.xpath('//a[contains(@href, "aime_key=")]').map do |a|
+        doc.xpath('//ul/li/a[contains(@href, "aime_key")]').map do |a|
           AimeSelectionAnchor.new(a)
         end
       end

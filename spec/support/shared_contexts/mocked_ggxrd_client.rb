@@ -33,5 +33,6 @@ RSpec.shared_context "with mocked api login methods" do
     allow(mocked_api).to receive(:search_player)
       .with(player_to_log_in.player_name, 1)
       .and_return(player_to_log_in_search_result)
+    allow(mocked_api).to receive(:select_aime).and_return(true)
   end
 end

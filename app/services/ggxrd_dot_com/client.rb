@@ -34,7 +34,7 @@ module GgxrdDotCom
                       btn_login: "ログイン"})
     end
 
-    def select_aime(aime_key=0)
+    def select_aime(aime_key)
       Rails.logger.debug { "[GGXRD-CLI] [select_aime] aime_key = #{aime_key}" }
       aime_key = aime_key.to_i
 
