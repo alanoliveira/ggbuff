@@ -13,7 +13,7 @@ RSpec.describe "Sessions", type: :request do
       include_context "with logged in player"
       it "redirected to root url" do
         get "/login"
-        expect(response).to have_http_status(:redirect)
+        expect(response).to redirect_to root_url
       end
     end
   end
@@ -22,10 +22,12 @@ RSpec.describe "Sessions", type: :request do
     include_context "with mocked api login methods"
     let(:player) { create(:player) }
 
-    it "returns http redirect" do
-      post "/login", params: {login_form: {sega_id: "sega_id", password: "password", remember_me: true}}
-      expect(response).to have_http_status(:redirect)
-      expect(session).not_to be_empty
+    context "when parameters are valid" do
+      it "returns http redirect" do
+        post "/login", params: {login_form: {sega_id: "sega_id", password: "password", remember_me: true}}
+        expect(response).to redirect_to root_url
+        expect(session).not_to be_empty
+      end
     end
 
     context "when parameters are invalid" do
@@ -39,14 +41,14 @@ RSpec.describe "Sessions", type: :request do
   describe "GET /logout" do
     it "returns http redirect" do
       get "/logout"
-      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to login_path
     end
 
     context "with logged in player" do
       include_context "with logged in player"
       it "redirected to root url" do
         get "/logout"
-        expect(response).to have_http_status(:redirect)
+        expect(response).to redirect_to login_path
         expect(session).to be_empty
       end
     end
@@ -63,7 +65,7 @@ RSpec.describe "Sessions", type: :request do
     context "with aime_key is passed" do
       it "redirected to root url" do
         get "/choose_aime", params: {aime_key: 0}
-      expect(response).to redirect_to root_url
+        expect(response).to redirect_to root_url
       end
     end
   end
