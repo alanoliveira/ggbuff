@@ -13,14 +13,19 @@ RSpec.describe MatchVictims do
     create(:match, player: player, player_char: :BA, result: :win, opponent: opponent1, opponent_char: :PO)
     create(:match, player: player, player_char: :BA, result: :win, opponent: opponent1, opponent_char: :PO)
     create(:match, player: player, player_char: :BA, result: :win, opponent: opponent1, opponent_char: :PO)
-    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
-    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
     create(:match, player: player, player_char: :BA, result: :win, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :win, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :win, opponent: opponent2, opponent_char: :LE)
     create(:match, player: player, player_char: :BA, result: :win, opponent: opponent2, opponent_char: :LE)
     create(:match, player: player, player_char: :BA, result: :win, opponent: opponent2, opponent_char: :LE)
     create(:match, player: player, player_char: :BA, result: :win, opponent: opponent2, opponent_char: :LE)
     create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent3, opponent_char: :MI)
-    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent3, opponent_char: :MI)
+    create(:match, player: player, player_char: :BA, result: :win, opponent: opponent3, opponent_char: :MI)
   end
 
   describe "#search" do
@@ -29,12 +34,12 @@ RSpec.describe MatchVictims do
     it do
       is_expected.to match_array(
         [
-          an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_char: :PO,
-                                      opponent_id: opponent1.id, total: 6, wins: 4),
           an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_char: :LE,
-                                      opponent_id: opponent2.id, total: 3, wins: 3),
+                                      opponent_id: opponent2.id, total: 4, wins: 4),
+          an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_char: :PO,
+                                      opponent_id: opponent1.id, total: 10, wins: 5),
           an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_char: :MI,
-                                      opponent_id: opponent3.id, total: 2, wins: 0)
+                                      opponent_id: opponent3.id, total: 2, wins: 1)
         ]
       )
     end
@@ -45,10 +50,10 @@ RSpec.describe MatchVictims do
       it do
         is_expected.to match_array(
           [
-            an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_char: :PO,
-                                        opponent_id: opponent1.id, total: 6, wins: 4),
             an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_char: :LE,
-                                        opponent_id: opponent2.id, total: 3, wins: 3)
+                                        opponent_id: opponent2.id, total: 4, wins: 4),
+            an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_char: :PO,
+                                        opponent_id: opponent1.id, total: 10, wins: 5)
           ]
         )
       end

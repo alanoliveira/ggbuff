@@ -13,13 +13,15 @@ RSpec.describe MatchTormentors do
     create(:match, player: player, player_char: :BA, result: :win, opponent: opponent1, opponent_char: :PO)
     create(:match, player: player, player_char: :BA, result: :win, opponent: opponent1, opponent_char: :PO)
     create(:match, player: player, player_char: :BA, result: :win, opponent: opponent1, opponent_char: :PO)
-    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
-    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
     create(:match, player: player, player_char: :BA, result: :win, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :win, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
+    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent1, opponent_char: :PO)
     create(:match, player: player, player_char: :BA, result: :win, opponent: opponent2, opponent_char: :LE)
-    create(:match, player: player, player_char: :BA, result: :win, opponent: opponent2, opponent_char: :LE)
-    create(:match, player: player, player_char: :BA, result: :win, opponent: opponent2, opponent_char: :LE)
-    create(:match, player: player, player_char: :BA, result: :win, opponent: opponent2, opponent_char: :LE)
+    create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent2, opponent_char: :LE)
     create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent3, opponent_char: :MI)
     create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent3, opponent_char: :MI)
     create(:match, player: player, player_char: :BA, result: :lose, opponent: opponent3, opponent_char: :MI)
@@ -35,9 +37,9 @@ RSpec.describe MatchTormentors do
           an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_id: opponent3.id,
                                       opponent_char: :MI, total: 4, wins: 0),
           an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_id: opponent1.id,
-                                      opponent_char: :PO, total: 6, wins: 4),
+                                      opponent_char: :PO, total: 10, wins: 5),
           an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_id: opponent2.id,
-                                      opponent_char: :LE, total: 4, wins: 4)
+                                      opponent_char: :LE, total: 2, wins: 1)
         ]
       )
     end
@@ -51,7 +53,7 @@ RSpec.describe MatchTormentors do
             an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_id: opponent3.id,
                                         opponent_char: :MI, total: 4, wins: 0),
             an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_id: opponent1.id,
-                                        opponent_char: :PO, total: 6, wins: 4)
+                                        opponent_char: :PO, total: 10, wins: 5)
           ]
         )
       end

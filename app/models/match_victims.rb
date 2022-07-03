@@ -4,6 +4,6 @@ class MatchVictims < MatchRivals
   private
 
   def ordering(rel)
-    rel.reorder("SUM(result) DESC, played_at DESC")
+    rel.reorder(Arel.sql("(COUNT(1) - SUM(result)) - SUM(result) ASC, COUNT(1) DESC"))
   end
 end

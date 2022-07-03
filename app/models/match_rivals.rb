@@ -7,6 +7,7 @@ class MatchRivals
 
   def search(limit: nil)
     rel = match_relation
+    rel = rel.where.not(opponent: nil)
     rel = grouping(rel)
     rel = ordering(rel)
     rel = rel.limit(limit) if limit.present?
@@ -38,7 +39,7 @@ class MatchRivals
   end
 
   def grouping(rel)
-    rel.group(:player_id, :player_char, :opponent_id, :opponent_char)
+    rel.group(:player_id, :opponent_id, :opponent_char)
   end
 
   def ordering(rel)
