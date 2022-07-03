@@ -43,6 +43,7 @@ en:
     labels:
       defaults:
         reset: "reset"
+        search: "search"
     placeholders:
       defaults:
         select: "select"

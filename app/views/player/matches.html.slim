@@ -7,7 +7,7 @@
       .card-header
         = PlayerMatchesSearchForm.model_name.human.titlecase
       .card-body
-        = form_with model: @player_matches_search_form, url: matches_path, local: true, method: :get do |f|
+        = form_with model: @player_matches_search_form, scope: "", url: matches_path, local: true, method: :get do |f|
           .row.mb-3
             .col-3.text-truncate
               = f.label :player_char, PlayerMatchesSearchForm.human_attribute_name(:player_char), class: "form-label"
@@ -21,7 +21,12 @@
           .row.mb-3
             .col-3.text-truncate
               = f.label :opponent_name, PlayerMatchesSearchForm.human_attribute_name(:opponent_name), class: "form-label"
-              = f.text_field :opponent_name, class: "form-control"
+              .row
+                .col-10
+                  = f.text_field :opponent_name, class: "form-control"
+                .col-2.px-0
+                  .form-check
+                    = f.check_box :opponent_name_partial, class: "form-check-input", title: PlayerMatchesSearchForm.human_attribute_name(:opponent_name_partial)
             .col-3.text-truncate
               = f.label :opponent_char, PlayerMatchesSearchForm.human_attribute_name(:opponent_char), class: "form-label"
               = f.select :opponent_char, Enums::CHARACTERS, {include_blank: t("forms.placeholders.defaults.select")}, class: "form-select"
@@ -43,16 +48,17 @@
               = f.date_field :played_at_to, class: "form-control"
           .row
             .col
-              = f.submit class: "btn btn-primary mx-1"
+              = f.submit t('forms.labels.defaults.search'), class: "btn btn-primary mx-1"
               = link_to t('forms.labels.defaults.reset'), {}, class: "btn btn-secondary mx-1"
 
-.row
-  .col.mb-4
-    = render "rivals_card", rivals: MatchRivals.new(@matches), limit: 5
-  .col.mb-4
-    = render "rivals_card", rivals: MatchVictims.new(@matches), limit: 5
-  .col.mb-4
-    = render "rivals_card", rivals: MatchTormentors.new(@matches), limit: 5
+- if @matches.group(:opponent_id).length > 1
+  .row
+    .col.mb-4.d-none-empty
+      = render "rivals_card", rivals: MatchRivals.new(@matches), limit: 5
+    .col.mb-4.d-none-empty
+      = render "rivals_card", rivals: MatchVictims.new(@matches), limit: 5
+    .col.mb-4.d-none-empty
+      = render "rivals_card", rivals: MatchTormentors.new(@matches), limit: 5
 
 .row
   .col
@@ -60,9 +66,10 @@
       .card-header
         = Match.model_name.human(count: 2).titlecase
         .span.float-end
-          span.text-success = @matches.win.count
-          | - 
-          span.text-danger = @matches.lose.count
+          span.text-success => @matches.win.count
+          |-
+          span.text-danger =< @matches.lose.count
+      - pager = @matches.page(params[:page])
       .card-body
         .row
           .table-responsive
@@ -79,21 +86,23 @@
                   th.d-none.d-lg-table-cell
                     = Match.human_attribute_name(:store_name)
               tbody
-                - @matches.each do |m|
+                - pager.each do |m|
                   tr
                     td = match_result_badge(m.result)
                     td = m.player_char
-                    td
+                    td.text-nowrap
                       = m.player_rank
                       = rank_change_icon(m.rank_change)
-                    td = m.opponent&.player_name
+                    td = opponent_name_with_search_link(m.opponent_name) if m.opponent.present?
                     td = m.opponent_char
                     td = m.opponent_rank
-                    td = l(m.played_at, format: :short)
+                    td
+                      span.d-md-none = l(m.played_at.to_date, format: :default)
+                      span.d-none.d-md-inline = l(m.played_at, format: :short)
                     td.d-none.d-lg-table-cell
                       span.text-truncate = m.store.name
         .row
           .col.d-none.d-md-block
-            = paginate @matches
+            = paginate pager
           .col.d-md-none.d-sm-block
-            = paginate @matches, window: 0
+            = paginate pager, window: 0

@@ -22,7 +22,7 @@ class PlayerMatchesSearchForm < ApplicationForm
     search = add_search_params_for_player(search)
     search = add_search_params_for_opponent(search)
     if played_at_from.present? || played_at_to.present?
-      search = search.where(played_at: Range.new(played_at_from, played_at_to))
+      search = search.where(played_at: Range.new(played_at_from&.beginning_of_day, played_at_to&.end_of_day))
     end
     search
   end

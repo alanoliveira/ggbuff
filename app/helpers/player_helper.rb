@@ -11,6 +11,14 @@ module PlayerHelper
     content_tag(:span, Match.human_enum_name(:result, match_result), class: "badge #{bg_class}")
   end
 
+  def opponent_name_with_search_link(opponent_name)
+    link_to opponent_name, request.query_parameters.merge(
+      :opponent_name             => opponent_name,
+      :opponent_name_partial     => nil,
+      Kaminari.config.param_name => nil
+    )
+  end
+
   private
 
   def rank_up_icon

@@ -5,7 +5,7 @@ class PlayerController < ApplicationController
 
   def matches
     @player_matches_search_form = PlayerMatchesSearchForm.new(current_player, player_matches_search_form_params)
-    @matches = @player_matches_search_form.search.page(params[:page])
+    @matches = @player_matches_search_form.search
   end
 
   def load_matches
@@ -28,7 +28,7 @@ class PlayerController < ApplicationController
   end
 
   def player_matches_search_form_params
-    params.fetch(:player_matches_search_form, {}).permit(
+    params.permit(
       :player_char,
       :player_rank_min,
       :player_rank_max,
