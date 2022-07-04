@@ -5,16 +5,13 @@ require "rails_helper"
 RSpec.describe MatchesLoader do
   let(:instance) { described_class.new(matches_load_process) }
   let(:api) { instance_double(GgxrdDotCom::Api) }
-  let(:matches_load_process) { create(:matches_load_process, ggxrd_api: api) }
+  let(:player) { create(:player) }
+  let(:matches_load_process) { create(:matches_load_process, player: player, ggxrd_api: api) }
 
   describe "#load_matches" do
     subject { instance.load_matches }
-    let(:logs_count) { 10 }
-    let(:play_log) {
-      build(:ggxrd_dot_com_play_log,
-            :with_logs,
-            logs_count: logs_count)
-    }
+    let(:logs_count) { 3 }
+    let(:play_log) { build(:ggxrd_dot_com_play_log, :with_logs, logs_count: logs_count) }
 
     before do
       allow(api).to receive(:matches).with(1).and_return(play_log)
@@ -29,7 +26,8 @@ RSpec.describe MatchesLoader do
 
     context "when there is no new matches" do
       before do
-        subject
+        other_matches_load_process = create(:matches_load_process, player: player, ggxrd_api: api)
+        described_class.new(other_matches_load_process).load_matches
       end
 
       it do

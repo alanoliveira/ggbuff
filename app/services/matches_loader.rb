@@ -14,7 +14,6 @@ class MatchesLoader
 
         # As we don't have the ggxrd.com id for store, is better not use it to find_or_initialize
         match.store = load_store(m)
-        match.played_at = match_date_calculator.calculate(m.play_date.to_datetime)
         match.matches_load_process = matches_load_process
         match.save
       end
@@ -46,7 +45,7 @@ class MatchesLoader
       player_rank:   match.player_rank,
       rank_change:   match.rank_change,
       result:        match.result,
-      played_at:     "LIKE #{match.play_date.to_datetime.strftime('%%-%m-%d %H:%M:00')}",
+      played_at:     match_date_calculator.calculate(match.play_date.to_datetime),
       opponent:      load_opponent(match),
       player:        matches_load_process.player
     )

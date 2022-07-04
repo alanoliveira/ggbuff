@@ -46,7 +46,7 @@ module GgxrdDotCom
           private
 
           def play_date_with_year(play_date)
-            "{DUMMY_PLAY_DATE_YEAR}/#{play_date}" if play_date.present?
+            "#{DUMMY_PLAY_DATE_YEAR}/#{play_date}" if play_date.present?
           end
 
           def result_to_sym(result)

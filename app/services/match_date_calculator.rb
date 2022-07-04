@@ -11,7 +11,7 @@ class MatchDateCalculator
     base_date = last_process_loaded_match&.played_at || Time.zone.now
 
     match_date = match_date.change(year: base_date.year)
-    match_date -= 1.year if match_date > base_date
+    match_date -= 1.year if match_date >= base_date
 
     match_date
   end
@@ -21,6 +21,6 @@ class MatchDateCalculator
   attr_reader :matches_load_process
 
   def last_process_loaded_match
-    matches_load_process.matches.reorder(created_at: :desc).last
+    matches_load_process.matches.last
   end
 end

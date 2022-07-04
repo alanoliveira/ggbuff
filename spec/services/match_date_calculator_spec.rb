@@ -38,6 +38,22 @@ RSpec.describe MatchDateCalculator do
         let(:match_date) { Time.zone.parse("2020-06-15 12:00:00") }
         it { is_expected.to eq Time.zone.parse("2020-06-15 12:00:00") }
       end
+
+      context "when match m-d H:M is equal the last match date" do
+        let(:match_date) { Time.zone.parse("2020-06-14 12:00:00") }
+        it { is_expected.to eq Time.zone.parse("2020-06-14 12:00:00") }
+      end
+
+      context "when more then 1 match was loaded in this matches_load_process" do
+        before do
+          create(:match, player: player, matches_load_process: matches_load_process, played_at: "2020-06-14 12:00:00")
+        end
+
+        let(:match_date) { Time.zone.parse("2020-06-14 12:00:00") }
+        it "uses the oldest match to calculate" do
+          is_expected.to eq Time.zone.parse("2019-06-14 12:00:00")
+        end
+      end
     end
   end
 end
