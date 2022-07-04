@@ -2,16 +2,18 @@
   .card-header.text-center
     = t("models.classes.#{rivals.class.to_s.underscore}")
   .card-body.text-center
-    table.table.table-striped.text-truncate
+    table.table.table-striped style="table-layout: fixed"
       thead
-        th = t("models.attributes.score.opponent")
-        th = t("models.attributes.score.opponent_char")
-        th = t("models.attributes.score.wins")
-        th = t("models.attributes.score.loses")
+        th.text-truncate width="50%"
+          = t("models.attributes.score.opponent")
+        th.text-truncate = t("models.attributes.score.opponent_char")
+        th.text-truncate = t("models.attributes.score.wins")
+        th.text-truncate = t("models.attributes.score.loses")
       tbody
         - rivals.search(limit: limit).each do |r|
           tr
-            td = opponent_name_with_search_link(r.opponent.name)
+            td.text-truncate
+              = opponent_name_with_search_link(r.opponent.name)
             td = r.opponent_char
             td.text-success = r.wins
             td.text-danger = r.loses
