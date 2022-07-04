@@ -1,6 +1,3 @@
-[![alanoliveira](https://circleci.com/gh/alanoliveira/ggbuff.svg?style=shield)](https://app.circleci.com/pipelines/github/alanoliveira/ggbuff)
-
-
 # ⚠️⚠️⚠️ IMPORTANT ⚠️⚠️⚠️
 
 **THIS IS A FAN MADE APP, IT IS NOT RELATED AT ALL WITH ARC SYSTEM WORKS.**
@@ -30,3 +27,9 @@ bin/rails db:{create,migrate,seed}
 yarn install
 bin/rails webpacker:compile
 ```
+
+## Status
+
+[![alanoliveira](https://circleci.com/gh/alanoliveira/ggbuff.svg?style=shield)](https://app.circleci.com/pipelines/github/alanoliveira/ggbuff)
+[![Heroku](http://heroku-badge.herokuapp.com/?app=ggbuff)](https://ggbuff.herokuapp.com/)
+
