@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2022_06_18_073431) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "matches", force: :cascade do |t|
-    t.integer "store_id", null: false
-    t.integer "player_id", null: false
-    t.integer "opponent_id"
+    t.bigint "store_id", null: false
+    t.bigint "player_id", null: false
+    t.bigint "opponent_id"
     t.integer "player_char", null: false
     t.integer "opponent_char", null: false
     t.integer "player_rank"
@@ -25,7 +28,7 @@ ActiveRecord::Schema.define(version: 2022_06_18_073431) do
     t.datetime "played_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "matches_load_process_id", null: false
+    t.bigint "matches_load_process_id", null: false
     t.index ["matches_load_process_id"], name: "index_matches_on_matches_load_process_id"
     t.index ["opponent_char"], name: "index_matches_on_opponent_char"
     t.index ["opponent_id"], name: "index_matches_on_opponent_id"
@@ -39,7 +42,7 @@ ActiveRecord::Schema.define(version: 2022_06_18_073431) do
 
   create_table "matches_load_processes", force: :cascade do |t|
     t.integer "state", default: 0
-    t.integer "player_id", null: false
+    t.bigint "player_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "error_description"

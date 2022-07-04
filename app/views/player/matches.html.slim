@@ -51,14 +51,13 @@
               = f.submit t('forms.labels.defaults.search'), class: "btn btn-primary mx-1"
               = link_to t('forms.labels.defaults.reset'), {}, class: "btn btn-secondary mx-1"
 
-- if @matches.group(:opponent_id).length > 1
-  .row
-    .col.mb-4.d-none-empty
-      = render "rivals_card", rivals: MatchRivals.new(@matches), limit: 5
-    .col.mb-4.d-none-empty
-      = render "rivals_card", rivals: MatchVictims.new(@matches), limit: 5
-    .col.mb-4.d-none-empty
-      = render "rivals_card", rivals: MatchTormentors.new(@matches), limit: 5
+.row
+  .col.mb-4.d-none-empty
+    = render "rivals_card", rivals: MatchRivals.new(@matches), limit: 5
+  .col.mb-4.d-none-empty
+    = render "rivals_card", rivals: MatchVictims.new(@matches), limit: 5
+  .col.mb-4.d-none-empty
+    = render "rivals_card", rivals: MatchTormentors.new(@matches), limit: 5
 
 .row
   .col

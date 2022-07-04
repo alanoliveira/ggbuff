@@ -20,6 +20,7 @@ It conver some missing functionallities from the [official app](http://www.ggxrd
 - Bundler 2.1.4
 - NodeJs 16.3.1
 - Yarn 1.22.19
+- Postgresql 14
 
 ## Building
 

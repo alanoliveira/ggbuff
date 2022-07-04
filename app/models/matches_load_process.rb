@@ -4,12 +4,12 @@
 #
 # Table name: matches_load_processes
 #
-#  id                :integer          not null, primary key
+#  id                :bigint           not null, primary key
 #  error_description :string
 #  state             :integer          default("created")
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  player_id         :integer          not null
+#  player_id         :bigint           not null
 #
 # Indexes
 #
@@ -17,7 +17,7 @@
 #
 # Foreign Keys
 #
-#  player_id  (player_id => players.id)
+#  fk_rails_...  (player_id => players.id)
 #
 class MatchesLoadProcess < ApplicationRecord
   include AASM

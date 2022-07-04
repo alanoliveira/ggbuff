@@ -7,13 +7,71 @@ jobs:
   test:
     docker:
       - image: cimg/ruby:2.7.6-node
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: circleci
+          TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+      - image: cimg/postgres:14.2
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_DB: ggbuff_test
+          POSTGRES_HOST_AUTH_METHOD: trust # no password
+          TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+
     executor: ruby/default
     steps:
       - checkout
-      - run: bin/bundle install
-      - run: yarn install
-      - run: bin/bundle exec rspec
-      - run: bin/bundle exec rubocop
+
+      # Restore bundle cache
+      - restore_cache:
+          keys:
+            - ggbuff-{{ checksum "Gemfile.lock" }}
+            - ggbuff-
+
+      # Bundle install dependencies
+      - run:
+          name: Install dependencies
+          command: |
+            bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
+            yarn install
+
+      - run: sudo apt install -y postgresql-client || true
+
+      # Store bundle cache
+      - save_cache:
+          key: ggbuff-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - run:
+          name: Rubocop 
+          command: bin/bundle exec rubocop
+
+      - run:
+          name: Database Setup
+          command: |
+            dockerize -wait tcp://localhost:5432 -timeout 1m
+            bundle exec rake db:create
+            bundle exec rake db:migrate
+            bundle exec rake db:seed
+
+      - run:
+          name: RSpec
+          command: |
+            bin/bundle exec rspec --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format documentation
+
+      # Save artifacts
+      - store_test_results:
+          path: test-results
 
 workflows:
   run_test:

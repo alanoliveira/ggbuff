@@ -29,11 +29,10 @@ class MatchRivals
     Score.new(
       {
         player_id:     item[0],
-        player_char:   item[1].to_sym,
-        opponent_id:   item[2],
-        opponent_char: item[3].to_sym,
-        total:         item[4],
-        wins:          item[5]
+        opponent_id:   item[1],
+        opponent_char: item[2].to_sym,
+        total:         item[3],
+        wins:          item[4]
       }
     )
   end
@@ -43,10 +42,10 @@ class MatchRivals
   end
 
   def ordering(rel)
-    rel.reorder("COUNT(1) DESC, played_at DESC")
+    rel.reorder("COUNT(1) DESC")
   end
 
   def plucking(rel)
-    rel.pluck(:player_id, :player_char, :opponent_id, :opponent_char, "COUNT(1)", "SUM(result)")
+    rel.pluck(:player_id, :opponent_id, :opponent_char, "COUNT(1)", "SUM(result)")
   end
 end

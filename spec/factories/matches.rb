@@ -4,7 +4,7 @@
 #
 # Table name: matches
 #
-#  id                      :integer          not null, primary key
+#  id                      :bigint           not null, primary key
 #  opponent_char           :integer          not null
 #  opponent_rank           :integer
 #  played_at               :datetime         not null
@@ -14,10 +14,10 @@
 #  result                  :integer          not null
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  matches_load_process_id :integer          not null
-#  opponent_id             :integer
-#  player_id               :integer          not null
-#  store_id                :integer          not null
+#  matches_load_process_id :bigint           not null
+#  opponent_id             :bigint
+#  player_id               :bigint           not null
+#  store_id                :bigint           not null
 #
 # Indexes
 #
@@ -33,10 +33,10 @@
 #
 # Foreign Keys
 #
-#  matches_load_process_id  (matches_load_process_id => matches_load_processes.id)
-#  opponent_id              (opponent_id => players.id)
-#  player_id                (player_id => players.id)
-#  store_id                 (store_id => stores.id)
+#  fk_rails_...  (matches_load_process_id => matches_load_processes.id)
+#  fk_rails_...  (opponent_id => players.id)
+#  fk_rails_...  (player_id => players.id)
+#  fk_rails_...  (store_id => stores.id)
 #
 FactoryBot.define do
   factory :match do

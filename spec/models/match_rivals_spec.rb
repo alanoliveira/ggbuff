@@ -32,12 +32,12 @@ RSpec.describe MatchRivals do
     it do
       is_expected.to match_array(
         [
-          an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_id: opponent1.id,
-                                      opponent_char: :PO, total: 6, wins: 4),
-          an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_char: :LE,
-                                      opponent_id: opponent2.id, total: 4, wins: 4),
-          an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_char: :MI,
-                                      opponent_id: opponent3.id, total: 4, wins: 0)
+          an_object_having_attributes(player_id: player.id, opponent_id: opponent1.id, opponent_char: :PO, total: 6,
+                                      wins: 4),
+          an_object_having_attributes(player_id: player.id, opponent_char: :LE, opponent_id: opponent2.id, total: 4,
+                                      wins: 4),
+          an_object_having_attributes(player_id: player.id, opponent_char: :MI, opponent_id: opponent3.id, total: 4,
+                                      wins: 0)
         ]
       )
     end
@@ -48,10 +48,10 @@ RSpec.describe MatchRivals do
       it do
         is_expected.to match_array(
           [
-            an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_id: opponent1.id,
-                                        opponent_char: :PO, total: 6, wins: 4),
-            an_object_having_attributes(player_id: player.id, player_char: :BA, opponent_char: :LE,
-                                        opponent_id: opponent2.id, total: 4, wins: 4)
+            an_object_having_attributes(player_id: player.id, opponent_id: opponent1.id, opponent_char: :PO, total: 6,
+                                        wins: 4),
+            an_object_having_attributes(player_id: player.id, opponent_char: :LE, opponent_id: opponent2.id, total: 4,
+                                        wins: 4)
           ]
         )
       end
