@@ -22,10 +22,10 @@ module PlayerHelper
   private
 
   def rank_up_icon
-    content_tag(:i, nil, class: "fa-solid fa-arrow-up text-primary mx-2", title: "rank up")
+    content_tag(:i, nil, class: "fas fa-arrow-up text-primary mx-2", title: "rank up")
   end
 
   def rank_down_icon
-    content_tag(:i, nil, {class: "fa-solid fa-arrow-down text-danger mx-2", title: "rank down"})
+    content_tag(:i, nil, {class: "fas fa-arrow-down text-danger mx-2", title: "rank down"})
   end
 end

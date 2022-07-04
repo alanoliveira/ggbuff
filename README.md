@@ -18,7 +18,7 @@ It conver some missing functionallities from the [official app](http://www.ggxrd
 ## Dependencies
 - Ruby 2.7.6
 - Bundler 2.1.4
-- NodeJs 16.15.1
+- NodeJs 16.3.1
 - Yarn 1.22.19
 
 ## Building
