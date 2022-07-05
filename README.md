@@ -22,6 +22,7 @@ It conver some missing functionallities from the [official app](http://www.ggxrd
 ## Building
 
 ```
+export DATABASE_URL="postgres://user:password@host"
 bundle install
 bin/rails db:{create,migrate,seed}
 yarn install
