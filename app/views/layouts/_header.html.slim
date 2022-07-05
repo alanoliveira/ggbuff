@@ -1,23 +1,23 @@
 header
-  nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  nav.navbar.navbar-expand.navbar-light.bg-light
     .container-fluid
       = link_to 'GGBuff', "/", class: 'navbar-brand'
-      button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
-        span.navbar-toggler-icon
-      .collapse.navbar-collapse id="navbarNav"
-        ul.navbar-nav.me-auto
-          li.nav-item
-            a.nav-link href="/" LINK1
-          - if player_signed_in?
-            li.nav-item
-              a.nav-link href="#{matches_path}" class="#{"active" if current_page?(matches_path)}"
-                = Match.model_name.human(count: 2).titlecase
-            li.nav-item
-              a.nav-link href="#{load_matches_path}" class="#{"active" if current_page?(matches_path)}" title="#{t('layouts.headers.load_matches')}"
-                i.fas.fa-sync
+      ul.navbar-nav.me-auto
         - if player_signed_in?
-          .dropdown
-            a.d-block.link-dark.text-decoration-none.dropdown-toggle href="#" id="navbarProfileMenuLink" data-bs-toggle="dropdown" aria-expanded="false"
-              = current_player.player_name
-            ul.dropdown-menu.dropdown-menu-end.text-small aria-labelledby="navbarProfileMenuLink"
-              = link_to t('layouts.headers.logout'), logout_url, class: "dropdown-item"
+          li.nav-item
+            a.nav-link href="#{matches_path}" class="#{"active" if current_page?(matches_path)}"
+              = Match.model_name.human(count: 2).titlecase
+          li.nav-item
+            a.nav-link href="#{load_matches_path}" class="#{"active" if current_page?(matches_path)}" title="#{t('layouts.headers.load_matches')}"
+              i.fas.fa-sync
+      - if player_signed_in?
+        .dropdown
+          a.d-block.link-dark.text-decoration-none.dropdown-toggle href="#" id="navbarProfileMenuLink" data-bs-toggle="dropdown" aria-expanded="false"
+            = current_player.player_name
+          ul.dropdown-menu.dropdown-menu-end.text-small aria-labelledby="navbarProfileMenuLink"
+            = link_to t('layouts.headers.logout'), logout_path, class: "dropdown-item"
+      - else player_signed_in?
+        .d-flex
+          ul.nav.me-2
+            li.nav-item
+              = link_to t('layouts.headers.login'), login_path, class: "nav-link link-dark px-2"
