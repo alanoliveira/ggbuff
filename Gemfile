@@ -64,6 +64,11 @@ group :development, :test do
   gem "rubocop-rails"
   # Check unnecessary eager/lazy load queries
   gem "bullet"
+  # Guard
+  gem "guard"
+  gem "guard-livereload"
+  gem "guard-rspec"
+  gem "guard-rubocop"
 end
 
 group :development do
