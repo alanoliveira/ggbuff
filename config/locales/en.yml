@@ -51,6 +51,7 @@ en:
     headers:
       logout: logout
       login: login
+      hide_opponents: "hide opponent"
       load_matches: "load matches"
     session:
       select_aime: select your aime card

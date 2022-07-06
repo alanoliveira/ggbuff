@@ -17,3 +17,7 @@
 .d-none-empty:empty {
   display: none !important;
 }
+
+.blur {
+  filter: blur(6px) !important;
+}

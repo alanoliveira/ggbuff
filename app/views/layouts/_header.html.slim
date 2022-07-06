@@ -12,10 +12,17 @@ header
               i.fas.fa-sync
       - if player_signed_in?
         .dropdown
-          a.d-block.link-dark.text-decoration-none.dropdown-toggle href="#" id="navbarProfileMenuLink" data-bs-toggle="dropdown" aria-expanded="false"
+          a.d-block.link-dark.text-decoration-none.dropdown-toggle href="#" id="navbarProfileMenuLink" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"
             = current_player.player_name
-          ul.dropdown-menu.dropdown-menu-end.text-small aria-labelledby="navbarProfileMenuLink"
-            = link_to t('layouts.headers.logout'), logout_path, class: "dropdown-item"
+          ul.dropdown-menu.dropdown-menu-end aria-labelledby="navbarProfileMenuLink"
+            li
+              = link_to t('layouts.headers.logout'), logout_path, class: "dropdown-item"
+            li
+              .dropdown-item
+                label for="cb-hide-opponent" class="form-check-label me-4"
+                  = t('layouts.headers.hide_opponents')
+                span.form-switch
+                  input.form-check-input type="checkbox" id="cb-hide-opponent"
       - else player_signed_in?
         .d-flex
           ul.nav.me-2

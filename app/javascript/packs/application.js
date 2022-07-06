@@ -14,3 +14,9 @@ import "../stylesheets/application";
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
+
+$(document).ready(() => {
+  $("#cb-hide-opponent").on("change", (e) => {
+    $(".opponent-name").toggleClass("blur", $(e.target).is(":checked"));
+  });
+});

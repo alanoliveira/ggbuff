@@ -16,7 +16,7 @@ module PlayerHelper
       :opponent_name             => opponent_name,
       :opponent_name_partial     => nil,
       Kaminari.config.param_name => nil
-    )
+    ), class: "opponent-name"
   end
 
   private

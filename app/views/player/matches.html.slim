@@ -43,7 +43,7 @@
             .col-3.text-truncate
               = f.label :played_at_from, PlayerMatchesSearchForm.human_attribute_name(:played_at_from), class: "form-label"
               = f.date_field :played_at_from, class: "form-control"
-            .col-3
+            .col-3.text-truncate
               = f.label :played_at_to, PlayerMatchesSearchForm.human_attribute_name(:played_at_to), class: "form-label"
               = f.date_field :played_at_to, class: "form-control"
           .row
@@ -52,11 +52,11 @@
               = link_to t('forms.labels.defaults.reset'), {}, class: "btn btn-secondary mx-1"
 
 .row
-  .col-4.mb-4.d-none-empty
+  .col-md-4.mb-4.d-none-empty
     = render "rivals_card", rivals: MatchRivals.new(@matches), limit: 5
-  .col-4.mb-4.d-none-empty
+  .col-md-4.mb-4.d-none-empty
     = render "rivals_card", rivals: MatchVictims.new(@matches), limit: 5
-  .col-4.mb-4.d-none-empty
+  .col-md-4.mb-4.d-none-empty
     = render "rivals_card", rivals: MatchTormentors.new(@matches), limit: 5
 
 .row
