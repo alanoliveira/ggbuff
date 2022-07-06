@@ -62,6 +62,18 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "ggbuff_production"
 
+  # action_mailer
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:        ENV.fetch("SYSTEM_EMAIL_ADDRESS"),
+    domain:         ENV.fetch("SYSTEM_EMAIL_DOMAIN"),
+    user_name:      ENV.fetch("SYSTEM_EMAIL_USERNAME"),
+    password:       ENV.fetch("SYSTEM_EMAIL_PASSWORD"),
+    port:           ENV.fetch("SYSTEM_EMAIL_PORT"),
+    authentication: :login,
+    open_timeout:   5,
+    read_timeout:   5
+  }
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -117,4 +129,14 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  config.middleware.use(
+    ExceptionNotification::Rack,
+    ignore_exceptions: ["GgxrdDotCom::Client::InMaintenanceError"] + ExceptionNotifier.ignored_exceptions,
+    email:             {
+      email_prefix:         "[ERROR] ",
+      sender_address:       ENV.fetch("SYSTEM_EMAIL_FROM"),
+      exception_recipients: [ENV.fetch("SYSTEM_EMAIL_TO")]
+    }
+  )
 end
