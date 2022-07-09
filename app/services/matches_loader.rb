@@ -3,7 +3,7 @@
 class MatchesLoader
   def initialize(matches_load_process)
     @matches_load_process = matches_load_process
-    @match_date_calculator = MatchDateCalculator.new(matches_load_process)
+    @match_date_calculator = MatchDateCalculator.new
   end
 
   def load_matches
