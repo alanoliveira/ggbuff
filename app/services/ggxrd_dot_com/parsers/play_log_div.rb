@@ -69,7 +69,7 @@ module GgxrdDotCom
         n = enemy_player_p.xpath("a[starts-with(@href, 'member_profile_view.php')]")
         n = enemy_player_p if n.empty?
 
-        n.xpath("text()").text
+        n.xpath("text()").text.strip
       end
 
       def opponent_profile_url

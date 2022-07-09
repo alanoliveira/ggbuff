@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :login_form, class: LoginForm do
+  factory :login_form, class: "LoginForm" do
     sega_id { "player_1" }
     password { "123456" }
     remember_me { true }

@@ -1,7 +1,10 @@
 # .rubocop.yml
 # based on https://gist.github.com/jhass/a5ae80d87f18e53e7b56
 
-require: rubocop-rails
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
 
 Rails:
   Enabled: true

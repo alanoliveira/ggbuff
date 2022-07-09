@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :player_matches_search_form, class: PlayerMatchesSearchForm do
+  factory :player_matches_search_form, class: "PlayerMatchesSearchForm" do
     player_char { nil }
     player_rank_min { nil }
     player_rank_max { nil }

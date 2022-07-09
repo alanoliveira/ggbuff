@@ -4,7 +4,8 @@ require "rails_helper"
 
 RSpec.describe MatchesLoaderJob, type: :job do
   describe "#perform" do
-    subject { described_class.new.perform(matches_load_process.id, "") }
+    subject(:perform) { described_class.new.perform(matches_load_process.id, "") }
+
     let(:matches_load_process) { create(:matches_load_process) }
 
     before do
@@ -15,8 +16,12 @@ RSpec.describe MatchesLoaderJob, type: :job do
     end
 
     it do
-      subject
+      perform
       expect(matches_load_process).to have_received(:load!)
+    end
+
+    it do
+      perform
       expect(matches_load_process).to have_received(:finish!)
     end
 
@@ -26,7 +31,7 @@ RSpec.describe MatchesLoaderJob, type: :job do
       end
 
       it do
-        expect { subject }.to change { matches_load_process.reload.state }.to("error")
+        expect { perform }.to change { matches_load_process.reload.state }.to("error")
       end
     end
   end

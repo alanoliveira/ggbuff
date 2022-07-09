@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe GgxrdDotCom::Parsers::LoginResultPage do
   describe "#error_description" do
-    subject { described_class.new(html).error_description }
+    subject(:error_description) { described_class.new(html).error_description }
 
     context "when login succeed", :aggregate_failures do
       let(:html) { "" }
@@ -26,11 +26,12 @@ RSpec.describe GgxrdDotCom::Parsers::LoginResultPage do
       end
 
       it do
-        is_expected.to include("ログインに失敗しました。以下の原因が考えられます。")
+        expect(error_description).to include("ログインに失敗しました。以下の原因が考えられます。")
           .and include("・アクセス過多のため、このID／ネットワークが制限されている。")
           .and include("・SEGA ID、パスワードが間違っている。")
-        is_expected.not_to match(%r{<br/?>}) # xpath(...).text remove the <br>
       end
+
+      it { expect(error_description).not_to match(%r{<br/?>}) } # xpath(...).text remove the <br>
     end
   end
 

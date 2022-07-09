@@ -8,28 +8,32 @@ end
 
 describe ApplicationController, type: :controller do
   describe "#current_player" do
+    subject { controller.current_player }
+
     context "when player is logged in" do
       let!(:player) { create(:player) }
 
       before { session[:player_id] = player.id }
 
-      it { expect(subject.current_player).to eq player }
+      it { is_expected.to eq player }
     end
 
     context "when player is not logged in" do
-      it { expect(subject.current_player).to be_nil }
+      it { is_expected.to be_nil }
     end
   end
 
   describe "#player_signed_in?" do
-    context "when player is logged in" do
-      before { allow(subject).to receive(:current_player).and_return(create(:player)) }
+    subject { controller.player_signed_in? }
 
-      it { expect(subject.player_signed_in?).to be true }
+    context "when player is logged in" do
+      before { allow(controller).to receive(:current_player).and_return(create(:player)) }
+
+      it { is_expected.to be true }
     end
 
     context "when player is not logged in" do
-      it { expect(subject.player_signed_in?).to be false }
+      it { is_expected.to be false }
     end
   end
 
@@ -42,9 +46,15 @@ describe ApplicationController, type: :controller do
 
     context "when player is logged in" do
       before { session[:player_id] = create(:player).id }
+
       it do
         get :index
         expect(response).not_to be_redirect
+      end
+
+      it do
+        get :index
+        expect(flash).to be_empty
       end
     end
 
@@ -53,17 +63,7 @@ describe ApplicationController, type: :controller do
         get :index
         expect(response).to redirect_to login_path
       end
-    end
-  end
 
-  describe "#require_player" do
-    controller do
-      def index
-        render html: "", template: true
-      end
-    end
-
-    context "when player is not logged in" do
       it do
         get :index
         expect(flash).to be_empty
@@ -144,6 +144,7 @@ describe ApplicationController, type: :controller do
 
   describe "rescue_from GgxrdDotCom::Client::NotAuthenticatedError" do
     before { session[:player_id] = create(:player).id }
+
     controller do
       skip_before_action :require_player
       def index
@@ -154,6 +155,10 @@ describe ApplicationController, type: :controller do
     it do
       get :index
       expect(session[:player_id]).to be_nil
+    end
+
+    it do
+      get :index
       expect(flash).not_to be_empty
     end
   end

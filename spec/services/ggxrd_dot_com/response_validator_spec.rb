@@ -7,7 +7,7 @@ RSpec.describe GgxrdDotCom::ResponseValidator do
   let(:response) { instance_double(HTTParty::Response, body: body) }
 
   describe "#validate!" do
-    subject { instance.validate! }
+    subject(:validate) { instance.validate! }
 
     context "when ggxrd.com is in maintenance" do
       let(:body) do
@@ -20,7 +20,7 @@ RSpec.describe GgxrdDotCom::ResponseValidator do
         HTML
       end
 
-      it { expect { subject }.to raise_error GgxrdDotCom::ResponseValidator::InMaintenanceError }
+      it { expect { validate }.to raise_error GgxrdDotCom::ResponseValidator::InMaintenanceError }
     end
 
     context "when request is not authenticated" do
@@ -32,7 +32,7 @@ RSpec.describe GgxrdDotCom::ResponseValidator do
         HTML
       end
 
-      it { expect { subject }.to raise_error GgxrdDotCom::ResponseValidator::NotAuthorizedError }
+      it { expect { validate }.to raise_error GgxrdDotCom::ResponseValidator::NotAuthorizedError }
     end
 
     context "when response is a username/password error" do
@@ -45,7 +45,7 @@ RSpec.describe GgxrdDotCom::ResponseValidator do
         HTML
       end
 
-      it { expect { subject }.not_to raise_error }
+      it { expect { validate }.not_to raise_error }
     end
   end
 end

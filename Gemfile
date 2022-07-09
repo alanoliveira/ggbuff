@@ -61,6 +61,8 @@ group :development, :test do
   # Rubocop
   gem "rubocop"
   gem "rubocop-rails"
+  gem "rubocop-rspec"
+  gem "rubocop-performance"
   # Check unnecessary eager/lazy load queries
   gem "bullet"
   # Guard

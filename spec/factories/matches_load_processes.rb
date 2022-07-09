@@ -30,7 +30,7 @@ FactoryBot.define do
       end
 
       matches {
-        matches_count.times.map { create(:match, player: player, matches_load_process: instance) }
+        Array.new(matches_count) { create(:match, player: player, matches_load_process: instance) }
       }
     end
   end

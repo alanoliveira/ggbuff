@@ -3,13 +3,13 @@
 require "rails_helper"
 
 RSpec.describe MatchesLoader do
-  let(:instance) { described_class.new(matches_load_process) }
   let(:api) { instance_double(GgxrdDotCom::Api) }
   let(:player) { create(:player) }
   let(:matches_load_process) { create(:matches_load_process, player: player, ggxrd_api: api) }
 
   describe "#load_matches" do
-    subject { instance.load_matches }
+    subject(:load_matches) { described_class.new(matches_load_process).load_matches }
+
     let(:logs_count) { 3 }
     let(:play_log) { build(:ggxrd_dot_com_play_log, :with_logs, logs_count: logs_count) }
 
@@ -20,7 +20,7 @@ RSpec.describe MatchesLoader do
 
     context "when there is new matches" do
       it do
-        expect { subject }.to change { Match.count }.by(logs_count)
+        expect { load_matches }.to change(Match, :count).by(logs_count)
       end
     end
 
@@ -31,7 +31,7 @@ RSpec.describe MatchesLoader do
       end
 
       it do
-        expect { subject }.not_to(change { Match.count })
+        expect { load_matches }.not_to(change(Match, :count))
       end
     end
 
@@ -39,7 +39,7 @@ RSpec.describe MatchesLoader do
       before { allow(api).to receive(:matches).with(2).and_raise(GgxrdDotCom::Parsers::Error) }
 
       it do
-        expect { subject }.to(raise_error(GgxrdDotCom::Parsers::Error).and(not_change { Match.count }))
+        expect { load_matches }.to(raise_error(GgxrdDotCom::Parsers::Error).and(not_change { Match.count }))
       end
     end
   end

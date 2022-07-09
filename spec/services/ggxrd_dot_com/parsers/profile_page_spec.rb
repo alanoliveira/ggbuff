@@ -16,11 +16,13 @@ RSpec.describe GgxrdDotCom::Parsers::ProfilePage do
 
     context "when player_name exists" do
       let(:player_name) { "GG BAIKEN PLAYER" }
+
       it { is_expected.to eq(player_name) }
     end
 
     context "when player_name is blank" do
       let(:player_name) { "" }
+
       it { is_expected.to eq("") }
     end
 

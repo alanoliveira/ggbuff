@@ -7,6 +7,7 @@ RSpec.describe GgxrdDotCom::Values::Aime do
 
   describe "#id" do
     subject { instance.id }
+
     let(:aime_id) { "1" }
     let(:url) { "/aime_key=#{aime_id}" }
 

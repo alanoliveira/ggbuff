@@ -26,6 +26,10 @@ RSpec.describe "Sessions", type: :request do
       it "returns http redirect" do
         post "/login", params: {login_form: {sega_id: "sega_id", password: "password", remember_me: true}}
         expect(response).to redirect_to root_url
+      end
+
+      it "clean session" do
+        post "/login", params: {login_form: {sega_id: "sega_id", password: "password", remember_me: true}}
         expect(session).not_to be_empty
       end
     end
@@ -49,6 +53,10 @@ RSpec.describe "Sessions", type: :request do
       it "redirected to root url" do
         get "/logout"
         expect(response).to redirect_to login_path
+      end
+
+      it "clean session" do
+        get "/logout"
         expect(session).to be_empty
       end
     end

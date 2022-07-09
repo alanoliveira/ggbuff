@@ -16,6 +16,7 @@ class MatchesLoader
         match.store = load_store(m)
         match.matches_load_process = matches_load_process
         match.save
+        match_date_calculator.base_date = match.played_at
       end
     end
   end

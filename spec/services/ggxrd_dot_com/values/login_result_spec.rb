@@ -6,7 +6,8 @@ RSpec.describe GgxrdDotCom::Values::LoginResult do
   let(:instance) { described_class.new }
 
   describe "#login_errors" do
-    subject { instance.login_errors }
+    subject(:login_errors) { instance.login_errors }
+
     let(:error_description) { "" }
 
     before { instance.error_description = error_description }
@@ -21,7 +22,7 @@ RSpec.describe GgxrdDotCom::Values::LoginResult do
       end
 
       it do
-        is_expected.to contain_exactly(
+        expect(login_errors).to contain_exactly(
           "・アクセス過多のため、このID／ネットワークが制限されている。",
           "・SEGA ID、パスワードが間違っている。"
         )
@@ -32,7 +33,7 @@ RSpec.describe GgxrdDotCom::Values::LoginResult do
       let(:error_description) { nil }
 
       it do
-        is_expected.to be_empty
+        expect(login_errors).to be_empty
       end
     end
   end

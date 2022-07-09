@@ -28,17 +28,16 @@ class MatchRivals
   def to_score(item)
     Score.new(
       {
-        player_id:     item[0],
-        opponent_id:   item[1],
-        opponent_char: item[2].to_sym,
-        total:         item[3],
-        wins:          item[4]
+        opponent_id:   item[0],
+        opponent_char: item[1].to_sym,
+        total:         item[2],
+        wins:          item[3]
       }
     )
   end
 
   def grouping(rel)
-    rel.group(:player_id, :opponent_id, :opponent_char)
+    rel.group(:opponent_id, :opponent_char)
   end
 
   def ordering(rel)
@@ -46,6 +45,6 @@ class MatchRivals
   end
 
   def plucking(rel)
-    rel.pluck(:player_id, :opponent_id, :opponent_char, "COUNT(1)", "SUM(result)")
+    rel.pluck(:opponent_id, :opponent_char, "COUNT(1)", "SUM(result)")
   end
 end

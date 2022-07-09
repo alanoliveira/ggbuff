@@ -2,7 +2,11 @@
 
 require "rails_helper"
 
-RSpec.describe "Indices", type: :request do
+RSpec.describe "Player", type: :request do
+  let(:api) { instance_double(GgxrdDotCom::Api) }
+
+  before { allow(GgxrdDotCom::Api).to receive(:new).and_return(api) }
+
   describe "GET /matches" do
     context "when player is not logged in" do
       it do
@@ -31,11 +35,15 @@ RSpec.describe "Indices", type: :request do
   end
 
   describe "GET /load_matches" do
-    before { allow_any_instance_of(GgxrdDotCom::Api).to receive(:profile) }
+    before do
+      allow(api).to receive(:profile)
+    end
 
     context "when player is not logged in" do
+      it {  expect { get "/load_matches" }.not_to(change(MatchesLoadProcess, :count)) }
+
       it do
-        expect { get "/load_matches" }.not_to(change { MatchesLoadProcess.count })
+        get "/load_matches"
         expect(response).to have_http_status(:redirect)
       end
     end
@@ -50,8 +58,10 @@ RSpec.describe "Indices", type: :request do
         create(:matches_load_process, player: player, state: :loading)
       end
 
+      it { expect { get "/load_matches" }.not_to(change(MatchesLoadProcess, :count)) }
+
       it do
-        expect { get "/load_matches" }.not_to(change { MatchesLoadProcess.count })
+        get "/load_matches"
         expect(response).to have_http_status(:redirect)
       end
     end
@@ -68,7 +78,11 @@ RSpec.describe "Indices", type: :request do
 
       it do
         expect { get "/load_matches" }
-          .to change { MatchesLoadProcess.count }.by(1).and have_enqueued_job(MatchesLoaderJob)
+          .to change(MatchesLoadProcess, :count).by(1).and have_enqueued_job(MatchesLoaderJob)
+      end
+
+      it do
+        get "/load_matches"
         expect(response).to have_http_status(:redirect)
       end
     end
@@ -81,7 +95,11 @@ RSpec.describe "Indices", type: :request do
 
       it do
         expect { get "/load_matches" }
-          .to change { MatchesLoadProcess.count }.by(1).and have_enqueued_job(MatchesLoaderJob)
+          .to change(MatchesLoadProcess, :count).by(1).and have_enqueued_job(MatchesLoaderJob)
+      end
+
+      it do
+        get "/load_matches"
         expect(response).to have_http_status(:redirect)
       end
     end

@@ -29,32 +29,23 @@ RSpec.describe MatchTormentors do
   end
 
   describe "#search" do
-    subject { instance.search }
+    subject(:search) { instance.search }
 
     it do
-      is_expected.to match_array(
-        [
-          an_object_having_attributes(player_id: player.id, opponent_id: opponent3.id, opponent_char: :MI, total: 4,
-                                      wins: 0),
-          an_object_having_attributes(player_id: player.id, opponent_id: opponent1.id, opponent_char: :PO, total: 10,
-                                      wins: 5),
-          an_object_having_attributes(player_id: player.id, opponent_id: opponent2.id, opponent_char: :LE, total: 2,
-                                      wins: 1)
-        ]
+      expect(search).to match_array(
+        [an_object_having_attributes(opponent_id: opponent3.id, opponent_char: :MI, total: 4, wins: 0),
+         an_object_having_attributes(opponent_id: opponent1.id, opponent_char: :PO, total: 10, wins: 5),
+         an_object_having_attributes(opponent_id: opponent2.id, opponent_char: :LE, total: 2, wins: 1)]
       )
     end
 
     context "when a limit is used" do
-      subject { instance.search(limit: 2) }
+      subject(:search_with_limit) { instance.search(limit: 2) }
 
       it do
-        is_expected.to match_array(
-          [
-            an_object_having_attributes(player_id: player.id, opponent_id: opponent3.id, opponent_char: :MI, total: 4,
-                                        wins: 0),
-            an_object_having_attributes(player_id: player.id, opponent_id: opponent1.id, opponent_char: :PO, total: 10,
-                                        wins: 5)
-          ]
+        expect(search_with_limit).to match_array(
+          [an_object_having_attributes(opponent_id: opponent3.id, opponent_char: :MI, total: 4, wins: 0),
+           an_object_having_attributes(opponent_id: opponent1.id, opponent_char: :PO, total: 10, wins: 5)]
         )
       end
     end

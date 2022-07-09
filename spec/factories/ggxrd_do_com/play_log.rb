@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :ggxrd_dot_com_play_log, class: GgxrdDotCom::Values::PlayLog do
+  factory :ggxrd_dot_com_play_log, class: "GgxrdDotCom::Values::PlayLog" do
     logs { [] }
 
     initialize_with { new(attributes) }
@@ -11,11 +11,11 @@ FactoryBot.define do
         logs_count { 5 }
       end
 
-      logs { logs_count.times.map { build(:ggxrd_dot_com_play_log_log) } }
+      logs { Array.new(logs_count) { build(:ggxrd_dot_com_play_log_log) } }
     end
   end
 
-  factory :ggxrd_dot_com_play_log_log, class: GgxrdDotCom::Values::PlayLog::Log do
+  factory :ggxrd_dot_com_play_log_log, class: "GgxrdDotCom::Values::PlayLog::Log" do
     result { GgxrdDotCom::Values::Enums::PLAY_LOG_RESULTS.keys.sample }
     rank_change { GgxrdDotCom::Values::Enums::PLAY_LOG_RANK_DIRECTIONS.keys.push(nil).sample }
     player_rank { GgxrdDotCom::Values::Enums::RANKS.keys.sample }
