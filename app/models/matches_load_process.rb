@@ -53,4 +53,8 @@ class MatchesLoadProcess < ApplicationRecord
   def ended?
     error? || finished?
   end
+
+  def running?
+    !ended?
+  end
 end

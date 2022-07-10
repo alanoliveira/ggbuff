@@ -2,37 +2,10 @@
 
 require "rails_helper"
 
-RSpec.describe "Player", type: :request do
+RSpec.describe "DataLoader", type: :request do
   let(:api) { instance_double(GgxrdDotCom::Api) }
 
   before { allow(GgxrdDotCom::Api).to receive(:new).and_return(api) }
-
-  describe "GET /matches" do
-    context "when player is not logged in" do
-      it do
-        get "/matches"
-        expect(response).to have_http_status(:redirect)
-      end
-    end
-
-    context "when player is logged in" do
-      include_context "with logged in player"
-      let(:player) { create(:player) }
-      let(:player_to_log_in) { player }
-
-      before do
-        create(:matches_load_process, :with_matches, player: player, matches_count: 5)
-        create(:matches_load_process, :with_matches, matches_count: 5)
-      end
-
-      it do
-        get "/matches"
-
-        doc = Nokogiri::HTML(response.body)
-        expect(doc.xpath("//table[@id='match-search-result-table']/tbody/tr").length).to eq 5
-      end
-    end
-  end
 
   describe "GET /load_matches" do
     before do
@@ -101,6 +74,33 @@ RSpec.describe "Player", type: :request do
       it do
         get "/load_matches"
         expect(response).to have_http_status(:redirect)
+      end
+    end
+  end
+
+  describe "GET /load_player" do
+    before do
+      allow(api).to receive(:profile).and_return(build(:ggxrd_dot_com_profile))
+    end
+
+    context "when player is not logged in" do
+      it do
+        get "/load_matches"
+
+        expect(response).to redirect_to login_url
+      end
+    end
+
+    context "when the player is logged in" do
+      include_context "with logged in player"
+
+      let(:player) { create(:player) }
+      let(:player_to_log_in) { player }
+
+      it do
+        get "/load_player"
+
+        expect(response).to redirect_to root_url
       end
     end
   end

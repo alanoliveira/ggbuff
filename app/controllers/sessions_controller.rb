@@ -20,8 +20,9 @@ class SessionsController < ApplicationController
     @aime_list = authenticate_ret.aime_list
     return render :aime_select if @aime_list.any?
 
-    load_player
-    redirect_to root_url
+    start_session
+
+    redirect_to load_player_url
   end
 
   def choose_aime
@@ -29,8 +30,9 @@ class SessionsController < ApplicationController
 
     update_ggxrd_cookies
 
-    load_player
-    redirect_to root_url
+    start_session
+
+    redirect_to load_player_url
   end
 
   def destroy
@@ -40,12 +42,12 @@ class SessionsController < ApplicationController
 
   private
 
-  def update_ggxrd_cookies
-    session[:ggxrd_cookies] = ggxrd_api.cookies
+  def start_session
+    session[:ggxrd_user_id] = ggxrd_api.fetch_ggxrd_user_id
   end
 
-  def load_player
-    session[:player_id] = PlayerLoader.new(ggxrd_api).load_player.id
+  def update_ggxrd_cookies
+    session[:ggxrd_cookies] = ggxrd_api.cookies
   end
 
   def login_params

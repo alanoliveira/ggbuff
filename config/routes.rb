@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   post "login", to: "sessions#create"
   get "logout", to: "sessions#destroy"
 
-  get "matches", to: "player#matches"
-  get "load_matches", to: "player#load_matches"
+  get "matches", to: "matches#index"
 
-  root to: "player#matches"
+  get "load_player", to: "data_loader#load_player"
+  get "load_matches", to: "data_loader#load_matches"
+
+  root to: "matches#index"
 end

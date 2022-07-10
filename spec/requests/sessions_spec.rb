@@ -25,7 +25,7 @@ RSpec.describe "Sessions", type: :request do
     context "when parameters are valid" do
       it "returns http redirect" do
         post "/login", params: {login_form: {sega_id: "sega_id", password: "password", remember_me: true}}
-        expect(response).to redirect_to root_url
+        expect(response).to redirect_to load_player_url
       end
 
       it "clean session" do
@@ -73,7 +73,7 @@ RSpec.describe "Sessions", type: :request do
     context "with aime_key is passed" do
       it "redirected to root url" do
         get "/choose_aime", params: {aime_key: 0}
-        expect(response).to redirect_to root_url
+        expect(response).to redirect_to load_player_url
       end
     end
   end
