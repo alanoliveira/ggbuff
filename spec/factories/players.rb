@@ -5,7 +5,7 @@
 # Table name: players
 #
 #  id            :bigint           not null, primary key
-#  player_name   :string
+#  player_name   :string           default("GG PLAYER")
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  ggxrd_user_id :integer          not null
