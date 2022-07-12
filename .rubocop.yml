@@ -12,18 +12,18 @@ Rails:
 AllCops:
   NewCops: enable
   Include:
-  - 'app/**/*.rb'
-  - 'spec/**/*.rb'
+    - "app/**/*.rb"
+    - "spec/**/*.rb"
 
 # Don't care about block length in test files
 Metrics/BlockLength:
   Exclude:
-    - 'spec/**/*'
+    - "spec/**/*"
 
-# Don't care about OpenStruct performance in test files 
+# Don't care about OpenStruct performance in test files
 Style/OpenStructUse:
   Exclude:
-    - 'spec/**/*'
+    - "spec/**/*"
 
 # Can't avoid write some japanese comments once the source of data is a japanese site
 Style/AsciiComments:
@@ -161,3 +161,6 @@ Lint/Debugger:
 # Style preference
 Style/MethodDefParentheses:
   Enabled: true
+
+RSpec/Focus:
+  AutoCorrect: false

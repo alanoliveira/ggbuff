@@ -65,11 +65,6 @@ group :development, :test do
   gem "rubocop-performance"
   # Check unnecessary eager/lazy load queries
   gem "bullet"
-  # Guard
-  gem "guard"
-  gem "guard-livereload"
-  gem "guard-rspec"
-  gem "guard-rubocop"
 end
 
 group :development do
@@ -83,6 +78,13 @@ group :development do
   gem "spring"
   # For class documentation
   gem "annotate"
+  # LSP
+  gem "solargraph"
+  # Guard
+  gem "guard"
+  gem "guard-livereload"
+  gem "guard-rspec"
+  gem "guard-rubocop"
 end
 
 group :test do
