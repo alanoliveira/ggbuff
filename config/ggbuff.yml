@@ -1,0 +1,7 @@
+shared:
+  matches_loader:
+    skip_older_than:
+
+production:
+  matches_loader:
+    skip_older_than: <%= ENV.fetch("GGBUFF_SKIP_MATCHES_OLDER_THAN", "") %>

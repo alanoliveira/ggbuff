@@ -35,6 +35,23 @@ RSpec.describe MatchesLoader do
       end
     end
 
+    context "when skip_older_than is set and there are old matches" do
+      before do
+        play_log.logs.each_with_index do |l, i|
+          l.play_date = (i * 5).days.ago.strftime("%m/%d %H:%M")
+        end
+
+        allow(Rails.configuration.ggbuff.matches_loader)
+          .to receive(:[])
+          .with(:skip_older_than)
+          .and_return(3.days.seconds)
+      end
+
+      it do
+        expect { load_matches }.to(change(Match, :count).by(1))
+      end
+    end
+
     context "when some error occur during the loading" do
       before { allow(api).to receive(:matches).with(2).and_raise(GgxrdDotCom::Parsers::Error) }
 
