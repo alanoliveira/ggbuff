@@ -1,7 +1,15 @@
 shared:
+  database_cleaner:
+    clean_matches_older_than:
+    clean_empty_matches_load_processes: false
+    clean_players_without_matches: false
   matches_loader:
     skip_older_than:
 
 production:
+  database_cleaner:
+    clean_matches_older_than: <%= ENV.fetch("GGBUFF_CLEAN_MATCHES_OLDER_THAN", nil) %>
+    clean_empty_matches_load_process: <%= ENV.fetch("GGBUFF_CLEAN_EMPTY_MATCHES_LOAD_PROCESSES", 0) %>
+    clean_players_without_matches: <%= ENV.fetch("GGBUFF_CLEAN_PLAYERS_WITHOUT_MATCHES", 0) %>
   matches_loader:
-    skip_older_than: <%= ENV.fetch("GGBUFF_SKIP_MATCHES_OLDER_THAN", "") %>
+    skip_older_than: <%= ENV.fetch("GGBUFF_SKIP_MATCHES_OLDER_THAN", nil) %>
