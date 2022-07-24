@@ -34,11 +34,12 @@ en:
   errors:
     ggxrd_dot_com:
       client:
-        in_maintenance_error : "ggxrd.com is under maintenance"
+        in_maintenance_error: "ggxrd.com is under maintenance"
         not_authenticated_error: "the ggxrd.com session expired. Please login again"
   texts:
     loading_matches: "Your matches data is being loaded."
     loading_matches_error: "The last try to load your matches had some error. Please try again."
+    loading_matches_limit: "Due to a limitation of the cost less server, we are only gathering data from the last %{num_days} days"
   forms:
     labels:
       defaults:
@@ -73,7 +74,7 @@ en:
 
   activerecord:
     models:
-      match: 
+      match:
         one: "match"
         other: "matches"
     attributes:
