@@ -31,7 +31,7 @@ RSpec.describe MatchesLoaderJob, type: :job do
       end
 
       it do
-        expect { perform }.to change { matches_load_process.reload.state }.to("error")
+        expect { perform }.to raise_error(StandardError).and change { matches_load_process.reload.state }.to("error")
       end
     end
   end

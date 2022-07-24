@@ -33,6 +33,8 @@ module Ggbuff
     # config.eager_load_paths << Rails.root.join("extras")
     #
 
+    config.ggbuff = config_for(:ggbuff)
+
     I18n.available_locales = %i[en]
     I18n.default_locale = :en
 

@@ -9,6 +9,7 @@ class DataLoaderController < ApplicationController
       ggxrd_api.profile # validate ggxrd.com auth cookies
       matches_load_process = current_player.matches_load_processes.create
       enqueue_matches_load_process(matches_load_process)
+      load_matches_limit_flash
     end
 
     redirect_to request.referer || root_url
@@ -21,6 +22,13 @@ class DataLoaderController < ApplicationController
   end
 
   private
+
+  def load_matches_limit_flash
+    return if Rails.configuration.ggbuff.matches_loader[:skip_older_than].blank?
+
+    flash[:info] =
+      t("texts.loading_matches_limit", num_days: Rails.configuration.ggbuff.matches_loader[:skip_older_than] / 1.day)
+  end
 
   def enqueue_matches_load_process(matches_load_process)
     options = {}

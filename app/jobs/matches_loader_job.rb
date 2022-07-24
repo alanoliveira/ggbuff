@@ -11,5 +11,6 @@ class MatchesLoaderJob < ApplicationJob
     matches_load_process.finish!
   rescue StandardError => e
     matches_load_process.update(state: :error, error_description: e.class)
+    raise e
   end
 end

@@ -10,7 +10,7 @@ class MatchesLoader
     Match.transaction do
       api_matches.each do |m|
         match = find_or_initialize_match(m)
-        break unless match.new_record?
+        break if stop_loading?(match)
 
         # As we don't have the ggxrd.com id for store, is better not use it to find_or_initialize
         match.store = load_store(m)
@@ -24,6 +24,12 @@ class MatchesLoader
   private
 
   attr_reader :matches_load_process, :match_date_calculator
+
+  def stop_loading?(match)
+    skip_older_than = Rails.configuration.ggbuff.matches_loader[:skip_older_than]
+    !match.new_record? ||
+      (skip_older_than.present? && match.played_at < skip_older_than.seconds.ago)
+  end
 
   def api_matches
     Enumerator.new do |enum|
