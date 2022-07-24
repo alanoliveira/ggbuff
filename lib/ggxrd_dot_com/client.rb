@@ -12,8 +12,9 @@ module GgxrdDotCom
     logger           Rails.logger, :debug
 
     def initialize(cookies=nil)
-      index # used to initialize the cookies
-      self.class.default_cookies.add_cookies(cookies) if cookies
+      @cookie_hash = HTTParty::CookieHash.new
+      cookie_hash.add_cookies(cookies) if cookies
+      index if cookie_hash.empty? # used to initialize the cookies
     end
 
     def index
@@ -73,16 +74,19 @@ module GgxrdDotCom
     end
 
     def cookies
-      self.class.default_cookies.to_cookie_string
+      cookie_hash.to_cookie_string
     end
 
     private
 
-    def request(method, *args)
-      response = self.class.send(method, *args)
+    attr_reader :cookie_hash
+
+    def request(method, path, opts={})
+      opts[:headers] = {"cookie" => cookies}
+      response = self.class.send(method, path, opts)
       ResponseValidator.new(response).validate!
-      cookies = response.get_fields("Set-Cookie") || []
-      cookies.each {|c| self.class.default_cookies.add_cookies(c) }
+      resp_cookies = response.get_fields("Set-Cookie") || []
+      resp_cookies.each {|c| cookie_hash.add_cookies(c) }
 
       ResponseValidator.new(response).validate!
       response.response
