@@ -8,8 +8,8 @@ header
             a.nav-link href="#{matches_path}" class="#{"active" if current_page?(matches_path)}"
               = Match.model_name.human(count: 2).titlecase
           li.nav-item
-            a.nav-link href="#{load_matches_path}" class="#{"active" if current_page?(matches_path)}" title="#{t('layouts.headers.load_matches')}"
-              i.fas.fa-sync
+            a.nav-link href="#{load_matches_path}" title="#{t('layouts.headers.load_matches')}"
+              i.fas.fa-sync.glow
       - if player_signed_in?
         .dropdown
           a.d-block.link-dark.text-decoration-none.dropdown-toggle href="#" id="navbarProfileMenuLink" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"

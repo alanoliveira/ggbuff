@@ -8,3 +8,19 @@
 .blur {
   filter: blur(6px) !important;
 }
+
+.glow {
+  animation: glow 2s infinite;
+}
+
+@keyframes glow {
+  0% {
+    color: blue;
+  }
+  75% {
+    color: orange;
+  }
+  100% {
+    color: blue;
+  }
+}
