@@ -22,6 +22,9 @@ class Player < ApplicationRecord
 
   alias_attribute :name, :player_name
 
+  scope :inactive, -> { where(last_login_at: nil) }
+  scope :active, -> { where.not(last_login_at: nil) }
+
   def update_last_login_at
     update(last_login_at: Time.zone.now)
   end

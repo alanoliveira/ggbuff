@@ -59,4 +59,5 @@ class Match < ApplicationRecord
   scope :rivals, ->(limit=5) { MatchRivals.new(self).search(limit: limit) }
   scope :victims, ->(limit=5) { MatchVictims.new(self).search(limit: limit) }
   scope :tormentors, ->(limit=5) { MatchTormentors.new(self).search(limit: limit) }
+  scope :with_player, ->(player) { where(player: player).or where(opponent: player) }
 end

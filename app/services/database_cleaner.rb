@@ -7,9 +7,12 @@ class DatabaseCleaner
 
   def run
     Rails.logger.info "[DATABASE_CLEANER] started (#{conf})"
-    clean_old_matches
-    clean_empty_matches_load_processes
-    clean_players_without_matches
+
+    if old_data_threashold.present?
+      clean_matches!
+      clean_matches_load_processes!
+      clean_players!
+    end
     Rails.logger.info "[DATABASE_CLEANER] ended"
   end
 
@@ -17,42 +20,40 @@ class DatabaseCleaner
 
   attr_reader :conf
 
-  def clean_old_matches
-    return if old_matches_threashold.blank?
+  def old_data_threashold
+    conf[:old_data_threshold].seconds.ago if conf[:old_data_threshold].present?
+  end
 
-    Rails.logger.info "[DATABASE_CLEANER] clean_old_matches started"
-    Match.where("played_at <= ?", old_matches_threashold).find_each do |match|
+  def clean_matches!
+    Rails.logger.info "[DATABASE_CLEANER] clean_matches started"
+    Match.where(played_at: ..old_data_threashold).find_each do |match|
       Rails.logger.info "[DATABASE_CLEANER] deleting #{match.inspect}"
       match.delete
     end
-    Rails.logger.info "[DATABASE_CLEANER] clean_old_matches ended"
+    Rails.logger.info "[DATABASE_CLEANER] clean_matches ended"
   end
 
-  def old_matches_threashold
-    conf[:clean_matches_older_than].seconds.ago if conf[:clean_matches_older_than].present?
-  end
-
-  def clean_empty_matches_load_processes
-    return if conf[:clean_empty_matches_load_processes].blank?
-
-    Rails.logger.info "[DATABASE_CLEANER] clean_empty_matches_loader_processes started"
-    MatchesLoadProcess.finished.each do |mlp|
-      if mlp.matches.count.zero?
-        Rails.logger.info "[DATABASE_CLEANER] deleting #{mlp.inspect}"
-        mlp.delete
-      end
+  def clean_matches_load_processes!
+    Rails.logger.info "[DATABASE_CLEANER] clean_matches_loader_processes started"
+    MatchesLoadProcess.where(created_at: ..old_data_threashold).find_each do |mlp|
+      Rails.logger.info "[DATABASE_CLEANER] deleting #{mlp.inspect}"
+      mlp.delete
     end
-    Rails.logger.info "[DATABASE_CLEANER] clean_empty_matches_loader_processes ended"
+    Rails.logger.info "[DATABASE_CLEANER] clean_matches_loader_processes ended"
   end
 
-  def clean_players_without_matches
-    return unless conf[:clean_players_without_matches]
+  def clean_players!
+    Rails.logger.info "[DATABASE_CLEANER] clean_players started"
+    Player.inactive.or(Player.where(last_login_at: ..old_data_threashold)).lock.find_each do |player|
+      next unless delete_player?(player)
 
-    Player.lock.all.each do |player|
-      if Match.where(player_id: player.id).or(Match.where(opponent_id: player.id)).count.zero?
-        Rails.logger.info "[DATABASE_CLEANER] deleting #{player.inspect}"
-        player.delete
-      end
+      Rails.logger.info "[DATABASE_CLEANER] deleting #{player.inspect}"
+      player.delete
     end
+    Rails.logger.info "[DATABASE_CLEANER] clean_players ended"
+  end
+
+  def delete_player?(player)
+    Match.with_player(player).count.zero?
   end
 end
