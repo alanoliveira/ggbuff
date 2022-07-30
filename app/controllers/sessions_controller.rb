@@ -2,6 +2,7 @@
 
 class SessionsController < ApplicationController
   include UsesGgxrdApi
+  invisible_captcha only: %i[create]
   skip_before_action :require_player, only: %i[new create choose_aime]
 
   def new

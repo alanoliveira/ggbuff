@@ -142,6 +142,8 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
+    invisible_captcha (2.0.0)
+      rails (>= 5.0)
     jaro_winkler (1.5.4)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -392,6 +394,7 @@ DEPENDENCIES
   guard-rubocop
   hashie
   httparty (~> 0.17.0)
+  invisible_captcha
   jbuilder (~> 2.7)
   kaminari
   listen (~> 3.3)

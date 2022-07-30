@@ -9,6 +9,7 @@ h1
          = e
 
 = form_with model: @login, url: login_path do |f|
+  = invisible_captcha
   .mb-3
     = f.label :sega_id, class: "form-label"
     = f.text_field :sega_id, class: "form-control"

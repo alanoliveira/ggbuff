@@ -43,6 +43,8 @@ gem "rails-i18n", "~> 6.0" # For 6.x
 gem "kaminari"
 gem "slim"
 
+gem "invisible_captcha" # prevention against spambots
+
 group :development, :test do
   # Rspec
   gem "rspec-collection_matchers"
@@ -60,9 +62,9 @@ group :development, :test do
   gem "pry-stack_explorer"
   # Rubocop
   gem "rubocop"
+  gem "rubocop-performance"
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem "rubocop-performance"
   # Check unnecessary eager/lazy load queries
   gem "bullet"
 end
