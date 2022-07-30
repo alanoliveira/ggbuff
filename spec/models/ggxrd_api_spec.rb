@@ -6,7 +6,10 @@ RSpec.describe GgxrdApi do
   let(:api) { instance_double(GgxrdDotCom::Api) }
   let(:instance) { described_class.new }
 
-  before { allow(GgxrdDotCom::Api).to receive(:new).and_return(api) }
+  before do
+    allow(GgxrdDotCom::Client).to receive(:new)
+    allow(GgxrdDotCom::Api).to receive(:new).and_return(api)
+  end
 
   describe "#fetch_ggxrd_user_id" do
     subject(:load_player) { instance.fetch_ggxrd_user_id }

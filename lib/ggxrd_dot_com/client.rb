@@ -7,7 +7,7 @@ module GgxrdDotCom
     class NotAuthenticatedError < ClientError; end
 
     include HTTParty
-    base_uri "http://www.ggxrd.com/pg2"
+    base_uri Rails.configuration.ggbuff.ggxrd_dot_com[:url]
     follow_redirects false
     logger           Rails.logger, :debug
 

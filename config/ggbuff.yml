@@ -1,4 +1,6 @@
 shared:
+  ggxrd_dot_com:
+    url: http://www.ggxrd.com/pg2
   database_cleaner:
     clean_matches_older_than:
     clean_empty_matches_load_processes: false
@@ -13,3 +15,7 @@ production:
     clean_players_without_matches: <%= ENV.fetch("GGBUFF_CLEAN_PLAYERS_WITHOUT_MATCHES", 0) %>
   matches_loader:
     skip_older_than: <%= ENV.fetch("GGBUFF_SKIP_MATCHES_OLDER_THAN", nil) %>
+
+test:
+  ggxrd_dot_com:
+    url: "http://foo.bar"
