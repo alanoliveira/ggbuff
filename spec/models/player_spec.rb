@@ -16,10 +16,17 @@
 #  index_players_on_ggxrd_user_id  (ggxrd_user_id) UNIQUE
 #  index_players_on_player_name    (player_name)
 #
-FactoryBot.define do
-  factory :player do
-    sequence(:ggxrd_user_id, 1000) {|n| n }
-    sequence(:player_name, 1000) {|n| "GG PLAYER #{n}" }
-    last_login_at { Time.zone.now }
+require "rails_helper"
+
+RSpec.describe Player do
+  describe "#update_last_login_at" do
+    subject(:update_last_login_at) { instance.update_last_login_at }
+
+    let(:instance) { create(:player, last_login_at: 1.week.ago) }
+
+    it do
+      expect { update_last_login_at }.to change { instance.reload.last_login_at }
+        .to(a_value_within(1.minute).of(Time.zone.now))
+    end
   end
 end

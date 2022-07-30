@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_10_111340) do
+ActiveRecord::Schema.define(version: 2022_07_30_081400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2022_07_10_111340) do
     t.integer "ggxrd_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_login_at"
     t.index ["ggxrd_user_id"], name: "index_players_on_ggxrd_user_id", unique: true
     t.index ["player_name"], name: "index_players_on_player_name"
   end

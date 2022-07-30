@@ -43,7 +43,9 @@ class SessionsController < ApplicationController
   private
 
   def start_session
-    session[:ggxrd_user_id] = ggxrd_api.fetch_ggxrd_user_id
+    ggxrd_user_id = ggxrd_api.fetch_ggxrd_user_id
+    session[:ggxrd_user_id] = ggxrd_user_id
+    Player.find_or_create_by(ggxrd_user_id: current_player_ggxrd_user_id).update_last_login_at
   end
 
   def update_ggxrd_cookies

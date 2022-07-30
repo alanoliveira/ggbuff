@@ -5,6 +5,7 @@
 # Table name: players
 #
 #  id            :bigint           not null, primary key
+#  last_login_at :datetime
 #  player_name   :string           default("GG PLAYER")
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -20,4 +21,8 @@ class Player < ApplicationRecord
   has_many :matches_load_processes, dependent: :destroy
 
   alias_attribute :name, :player_name
+
+  def update_last_login_at
+    update(last_login_at: Time.zone.now)
+  end
 end
