@@ -15,10 +15,10 @@ html
         .row
           .col
             - flash.each do |type, message|
-              .alert.alert-dismissible.fade.show.m-3 role="alert" class="alert-#{type}"
+              .alert.alert-dismissible.fade.show.m-3 role="alert" class="#{flash_alert_class(type)}"
                 = message
                 button.btn-close type="button" data-bs-dismiss="alert" aria-label="close"
         .row
           .col
-            = yield 
+            = yield
     = render "layouts/footer"
