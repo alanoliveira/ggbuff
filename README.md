@@ -32,5 +32,3 @@ bin/rails webpacker:compile
 ## Status
 
 [![alanoliveira](https://circleci.com/gh/alanoliveira/ggbuff.svg?style=shield)](https://app.circleci.com/pipelines/github/alanoliveira/ggbuff)
-[![Heroku](http://heroku-badge.herokuapp.com/?app=ggbuff)](https://ggbuff.herokuapp.com/)
-
