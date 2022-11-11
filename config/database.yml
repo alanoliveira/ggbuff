@@ -82,5 +82,4 @@ test:
 production:
   <<: *default
   database: ggbuff_production
-  username: ggbuff
   password: <%= ENV['GGBUFF_DATABASE_PASSWORD'] %>

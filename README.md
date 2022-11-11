@@ -21,12 +21,24 @@ It conver some missing functionallities from the [official app](http://www.ggxrd
 
 ## Building
 
+### Local
+
 ```
 export DATABASE_URL="postgres://user:password@host"
 bundle install
 bin/rails db:{create,migrate,seed}
 yarn install
 bin/rails webpacker:compile
+```
+
+### Docker
+
+```
+docker compose build
+docker compose run web rake db:create
+docker compose run web rake db:migrate
+docker compose run web rails webpacker:compile
+docker compose up
 ```
 
 ## Status
