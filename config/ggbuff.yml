@@ -1,6 +1,6 @@
 shared:
   ggxrd_dot_com:
-    url: http://www.ggxrd.com/pg2
+    url: https://www.ggxrd.com/pg2
   database_cleaner:
     clean_matches_older_than:
     clean_empty_matches_load_processes: false
