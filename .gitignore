@@ -47,3 +47,6 @@ spec/examples.txt
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Ignore test results file
+/test_results/*
