@@ -19,27 +19,12 @@ It conver some missing functionallities from the [official app](http://www.ggxrd
 - Yarn 1.22.19
 - Postgresql 14
 
-## Building
+## Building/Running
 
-### Local
-
-```
-export DATABASE_URL="postgres://user:password@host"
-bundle install
-bin/rails db:{create,migrate,seed}
-yarn install
-bin/rails webpacker:compile
-```
-
-### Docker
-
-```
-docker compose build
-docker compose run web rake db:create
-docker compose run web rake db:migrate
-docker compose run web rails webpacker:compile
-docker compose up
-```
+1. Clone this repo
+2. Set environment variables according on `.env.template`
+3. `bin/setup`
+4. `bin/run`
 
 ## Status
 
