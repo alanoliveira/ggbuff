@@ -5,5 +5,4 @@ RUN gem install bundler -v 2.1.4
 RUN mkdir /app
 WORKDIR /app
 ADD . /app
-RUN bundle install
-RUN yarn install
+RUN bin/setup

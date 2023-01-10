@@ -67,6 +67,8 @@ group :development, :test do
   gem "rubocop-rspec"
   # Check unnecessary eager/lazy load queries
   gem "bullet"
+  # Dotenv
+  gem "dotenv-rails"
 end
 
 group :development do

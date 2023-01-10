@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "[ bin/ci ] Running linter"
+bin/bundle exec rubocop
+
+echo
+echo "[ bin/ci ] Running unit tests"
+bin/bundle exec rspec --format RspecJunitFormatter \
+                      --out test_results/rspec.xml \
+                      --format documentation
+
+echo "[ bin/ci ] Done"

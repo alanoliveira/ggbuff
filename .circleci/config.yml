@@ -20,7 +20,8 @@ jobs:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
         environment:
-          POSTGRES_USER: circleci
+          POSTGRES_USER: ggbuff
+          POSTGRES_PASSWORD: ggbuff
           POSTGRES_DB: ggbuff_test
           POSTGRES_HOST_AUTH_METHOD: trust # no password
           TZ: "/usr/share/zoneinfo/Asia/Tokyo"
@@ -51,23 +52,12 @@ jobs:
             - vendor/bundle
 
       - run:
-          name: Rubocop 
-          command: bin/bundle exec rubocop
+          name: Setup 
+          command: bin/setup
 
       - run:
-          name: Database Setup
-          command: |
-            dockerize -wait tcp://localhost:5432 -timeout 1m
-            bundle exec rake db:create
-            bundle exec rake db:migrate
-            bundle exec rake db:seed
-
-      - run:
-          name: RSpec
-          command: |
-            bin/bundle exec rspec --format RspecJunitFormatter \
-                              --out test_results/rspec.xml \
-                              --format documentation
+          name: Ci
+          command: bin/ci
 
       # Save artifacts
       - store_test_results:
