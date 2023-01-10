@@ -1,19 +1,8 @@
 shared:
   ggxrd_dot_com:
-    url: https://www.ggxrd.com/pg2
+    url: <%= ENV.fetch("GGXRD_DOT_COM_URL", nil) %>
   database_cleaner:
     clean_matches_older_than:
-    clean_empty_matches_load_processes: false
-    clean_players_without_matches: false
-  matches_loader:
-    skip_older_than:
-
-production:
-  database_cleaner:
     old_data_threshold: <%= ENV.fetch("GGBUFF_OLD_DATA_THRESHOLD", nil) %>
   matches_loader:
     skip_older_than: <%= ENV.fetch("GGBUFF_SKIP_MATCHES_OLDER_THAN", nil) %>
-
-test:
-  ggxrd_dot_com:
-    url: "http://foo.bar"
