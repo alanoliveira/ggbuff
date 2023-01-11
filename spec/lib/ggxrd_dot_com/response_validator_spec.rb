@@ -20,7 +20,7 @@ RSpec.describe GgxrdDotCom::ResponseValidator do
         HTML
       end
 
-      it { expect { validate }.to raise_error GgxrdDotCom::ResponseValidator::InMaintenanceError }
+      it { expect { validate }.to raise_error GgxrdDotCom::Client::InMaintenanceError }
     end
 
     context "when request is not authenticated" do
@@ -32,7 +32,7 @@ RSpec.describe GgxrdDotCom::ResponseValidator do
         HTML
       end
 
-      it { expect { validate }.to raise_error GgxrdDotCom::ResponseValidator::NotAuthorizedError }
+      it { expect { validate }.to raise_error GgxrdDotCom::Client::NotAuthenticatedError }
     end
 
     context "when response is a username/password error" do

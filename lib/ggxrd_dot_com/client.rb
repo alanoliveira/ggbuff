@@ -9,7 +9,7 @@ module GgxrdDotCom
     include HTTParty
     base_uri Rails.configuration.ggbuff.ggxrd_dot_com[:url]
     follow_redirects false
-    logger           Rails.logger, :debug
+    logger Rails.logger
 
     def initialize(cookies=nil)
       @cookie_hash = HTTParty::CookieHash.new
