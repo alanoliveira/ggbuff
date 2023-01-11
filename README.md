@@ -23,8 +23,15 @@ It conver some missing functionallities from the [official app](http://www.ggxrd
 
 1. Clone this repo
 2. Set environment variables according on `.env.template`
+ 
+### Local
 3. `bin/setup`
 4. `bin/run`
+
+### Docker
+3. `bin/docker start`
+4. `bin/docker exec bin/setup`
+4. `bin/docker exec bin/run`
 
 ## Status
 

@@ -12,8 +12,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD
         environment:
           RAILS_ENV: test
-          PGHOST: 127.0.0.1
-          PGUSER: circleci
+          DATABASE_URL: postgres://ggbuff:ggbuff@localhost:5432/ggbuff_test
           TZ: "/usr/share/zoneinfo/Asia/Tokyo"
       - image: cimg/postgres:14.2
         auth:
